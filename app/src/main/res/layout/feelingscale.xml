@@ -4,49 +4,58 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/background_feeling"
+
     tools:context=".MainActivity">
 
-    <Button
-        android:id="@+id/button6"
-        android:layout_width="79dp"
-        android:layout_height="61dp"
-        android:layout_marginEnd="48dp"
-        android:layout_marginBottom="160dp"
-        android:text="Button"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-    <Button
-        android:id="@+id/veryHappy"
-        android:layout_width="86dp"
-        android:layout_height="57dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginBottom="220dp"
-        android:onClick="moodClick"
-        android:text="Button"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <Button
-        android:id="@+id/Disappointed"
-        android:layout_width="91dp"
-        android:layout_height="61dp"
-        android:layout_marginEnd="160dp"
-        android:layout_marginBottom="100dp"
-        android:text="Button"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-    <Button
-        android:id="@+id/Medium"
-        android:layout_width="85dp"
-        android:layout_height="59dp"
-        android:layout_marginBottom="100dp"
+    <ImageButton
+        android:id="@+id/medium"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginEnd="180dp"
+        android:layout_marginBottom="216dp"
         android:text="Button"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.076"
+        android:background="@drawable/ic_smiley_normal"
+        />
+
+    <ImageButton
+        android:id="@+id/veryHappy"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginBottom="216dp"
+        android:background="@drawable/ic_smiley_super_happy"
+        android:text="Button"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.023"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageButton
+        android:id="@+id/sad"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="216dp"
+        android:text="Button"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:background="@drawable/ic_smiley_sad"
+        />
+
+    <ImageButton
+        android:id="@+id/disappointed"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginBottom="216dp"
+        android:text="Button"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.712"
+        app:layout_constraintStart_toStartOf="parent"
+        android:background="@drawable/ic_smiley_disappointed"
+        />
 
     <TextView
         android:id="@+id/welcomeText"
@@ -55,10 +64,10 @@
         android:text="Welcome to MoodMaster!"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.436"
+        app:layout_constraintHorizontal_bias="0.444"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.035" />
+        app:layout_constraintVertical_bias="0.037" />
 
     <TextView
         android:id="@+id/welcomeQ"
@@ -67,10 +76,10 @@
         android:text="How are you feeling today?"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.431"
+        app:layout_constraintHorizontal_bias="0.448"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/welcomeText"
-        app:layout_constraintVertical_bias="0.041" />
+        app:layout_constraintVertical_bias="0.023" />
 
     <Button
         android:id="@+id/btnSensor"
@@ -86,22 +95,28 @@
         android:id="@+id/moodImageView"
         android:layout_width="214dp"
         android:layout_height="201dp"
-        android:layout_marginTop="84dp"
+        android:layout_marginTop="128dp"
         android:src="@drawable/ic_smiley_normal"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.411"
+        app:layout_constraintHorizontal_bias="0.406"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/welcomeQ" />
 
-    <Button
-        android:id="@+id/Happy"
-        android:layout_width="85dp"
-        android:layout_height="59dp"
-        android:layout_marginBottom="220dp"
+    <ImageButton
+        android:id="@+id/happy"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginBottom="216dp"
         android:text="Button"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.49"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintHorizontal_bias="0.253"
+        app:layout_constraintStart_toStartOf="parent"
+        android:background="@drawable/ic_smiley_happy"
+        />
+
+
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

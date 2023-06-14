@@ -1,23 +1,23 @@
-package com.example.moodmaster;
+package com.example.moodmaster.sensors;
 
 import android.os.Bundle;
-import android.util.Log;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.List;
 
-import android.os.Bundle;
-import android.util.Log;
 import android.widget.TextView;
 
-import androidx.appcompat.app.AppCompatActivity;
+import com.example.moodmaster.R;
 
-import java.util.List;
-
+/**
+ *
+ */
 public class sensor_test extends AppCompatActivity {
     private SensorHelper sensorHelper;
+
     private TextView tvLightValues;
+
     private TextView tvAccelerometerValues; // Add TextView for accelerometer values
 
     @Override
@@ -35,14 +35,12 @@ public class sensor_test extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        // Start listening for sensor changes
         sensorHelper.start();
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        // Stop listening for sensor changes
         sensorHelper.stop();
     }
 
@@ -50,17 +48,21 @@ public class sensor_test extends AppCompatActivity {
         List<Float> lightValues = sensorHelper.getLightValues();
         List<Float> accelerometerValues = sensorHelper.getAccelerometerValues();
 
-        // Update the TextViews with the sensor values
-        StringBuilder lightSb = new StringBuilder();
-        for (float value : lightValues) {
-            lightSb.append(value).append("\n");
-        }
-        tvLightValues.setText(lightSb.toString());
+
+        updateTextViewWithValues(tvLightValues, lightValues);
 
         StringBuilder accelerometerSb = new StringBuilder();
         for (float value : accelerometerValues) {
             accelerometerSb.append(value).append("\n");
         }
         tvAccelerometerValues.setText(accelerometerSb.toString());
+    }
+
+    private void updateTextViewWithValues(TextView t, List<Float> values){
+        StringBuilder lightSb = new StringBuilder();
+        for (float value : values) {
+            lightSb.append(value).append("\n");
+        }
+        t.setText(lightSb.toString());
     }
 }

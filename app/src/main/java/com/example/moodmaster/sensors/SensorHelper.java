@@ -1,4 +1,4 @@
-package com.example.moodmaster;
+package com.example.moodmaster.sensors;
 
 import android.content.Context;
 import android.hardware.Sensor;

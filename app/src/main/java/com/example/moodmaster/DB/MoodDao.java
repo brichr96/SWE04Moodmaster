@@ -1,11 +1,12 @@
-package com.example.moodmaster;
+package com.example.moodmaster.DB;
 
 import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
 
-import java.sql.Date;
+import com.example.moodmaster.mood_algo.Mood;
+
 import java.util.List;
 
 @Dao

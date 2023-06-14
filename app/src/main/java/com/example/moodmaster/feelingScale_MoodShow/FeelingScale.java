@@ -1,4 +1,4 @@
-package com.example.moodmaster;
+package com.example.moodmaster.feelingScale_MoodShow;
 
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -6,10 +6,15 @@ import android.os.Bundle;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.moodmaster.mood_algo.Mood;
+import com.example.moodmaster.DB.MoodDao;
+import com.example.moodmaster.DB.RoomDB;
+import com.example.moodmaster.R;
 
 import java.util.List;
 
@@ -30,14 +35,67 @@ public class FeelingScale extends AppCompatActivity {
         moodDao = roomDb.moodDao();
 
         moodImageView = findViewById(R.id.moodImageView);
-        Button mButton = findViewById(R.id.veryHappy);
 
-        mButton.setOnClickListener(new View.OnClickListener() {
+        ImageButton mButtonVH = findViewById(R.id.veryHappy);
+        ImageButton mButtonH = findViewById(R.id.happy);
+        ImageButton mButtonM = findViewById(R.id.medium);
+        ImageButton mButtonD = findViewById(R.id.disappointed);
+        ImageButton mButtonS = findViewById(R.id.disappointed);
+
+
+
+        mButtonVH.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                moodClick();
+                Mood newMood = new Mood(5);
+                new InsertMoodAsyncTask().execute(newMood);
+                Intent intent = new Intent(FeelingScale.this, Mood_Show.class );
+                startActivity(intent);
             }
         });
+
+        mButtonH.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Mood newMood = new Mood(4);
+                new InsertMoodAsyncTask().execute(newMood);
+                Intent intent = new Intent(FeelingScale.this, Mood_Show.class );
+                startActivity(intent);
+            }
+        });
+
+        mButtonM.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Mood newMood = new Mood(3);
+                new InsertMoodAsyncTask().execute(newMood);
+                Intent intent = new Intent(FeelingScale.this, Mood_Show.class );
+                startActivity(intent);
+            }
+        });
+
+        mButtonD.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Mood newMood = new Mood(2);
+                new InsertMoodAsyncTask().execute(newMood);
+                Intent intent = new Intent(FeelingScale.this, Mood_Show.class );
+                startActivity(intent);
+            }
+        });
+
+        mButtonM.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Mood newMood = new Mood(1);
+                new InsertMoodAsyncTask().execute(newMood);
+                Intent intent = new Intent(FeelingScale.this, Mood_Show.class );
+                startActivity(intent);
+            }
+        });
+
+
+
 
         // List of moods (replace with your actual drawable resources)
         moods = new int[] {
@@ -79,16 +137,6 @@ public class FeelingScale extends AppCompatActivity {
         return gestureDetector.onTouchEvent(event);
     }
 
-    private void moodClick() {
-        // Create a new Mood object with the current mood value
-        Mood newMood = new Mood(1);
-
-        // Insert the new mood into the database
-        new InsertMoodAsyncTask().execute(newMood);
-
-        Intent intent = new Intent(FeelingScale.this, Mood_Show.class );
-        startActivity(intent);
-    }
 
     private class InsertMoodAsyncTask extends AsyncTask<Mood, Void, Void> {
         @Override

@@ -1,9 +1,11 @@
-package com.example.moodmaster;
+package com.example.moodmaster.mood_algo;
 
 
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 import androidx.room.TypeConverters;
+
+import com.example.moodmaster.Converters;
 
 import java.util.Date;
 
