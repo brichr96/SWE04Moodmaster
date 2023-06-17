@@ -42,7 +42,7 @@ dependencies {
     implementation 'androidx.sqlite:sqlite:2.1.0'
     implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
     implementation 'com.google.android.gms:play-services-fitness:21.1.0'
-    //implementation 'com.huawei.hms:health:11.0.0.512'
+    implementation 'com.google.android.gms:play-services-auth:20.5.0'
 
 
 }

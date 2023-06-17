@@ -1,12 +1,16 @@
 package com.example.moodmaster.feelingScale_MoodShow;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.moodmaster.googleFit.Huawei_API;
 import com.example.moodmaster.mood_algo.Mood;
 import com.example.moodmaster.DB.MoodDao;
 import com.example.moodmaster.R;
@@ -23,6 +27,7 @@ import java.util.Locale;
 public class Mood_Show extends AppCompatActivity {
     private LineChart chart;
     private MoodDao moodDao;
+    private Button login;
 
     private TextView tvAverageMood;
 
@@ -33,15 +38,22 @@ public class Mood_Show extends AppCompatActivity {
 
         RoomDB roomDb = RoomDB.getInstance(getApplicationContext());
         moodDao = roomDb.moodDao();
-
         chart = findViewById(R.id.chart);
+        login = findViewById(R.id.login);
 
         new GetAllMoodsAsyncTask().execute();
+
+        login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Mood_Show.this, Huawei_API.class);
+                startActivity(intent);
+            }
+        });
     }
 
     private void generateLineChart(List<Mood> moods) {
         List<Entry> entries = new ArrayList<>();
-
         int moodIndex = 0;
         for (Mood mood : moods) {
             entries.add(new Entry(moodIndex, mood.getMood()));
@@ -53,10 +65,6 @@ public class Mood_Show extends AppCompatActivity {
         dataSet.setColor(Color.GREEN);
         dataSet.setDrawValues(false);
 
-
-
-
-
         LineData lineData = new LineData(dataSet);
         chart.setData(lineData);
         chart.invalidate();
@@ -67,8 +75,7 @@ public class Mood_Show extends AppCompatActivity {
         chart.getAxisRight().setEnabled(false);
         chart.getDescription().setEnabled(false);
 
-
-// Set custom Y-Axis labels
+        // Set custom Y-Axis labels
         chart.getAxisLeft().setValueFormatter(new com.github.mikephil.charting.formatter.ValueFormatter() {
             @Override
             public String getFormattedValue(float value) {
@@ -90,15 +97,12 @@ public class Mood_Show extends AppCompatActivity {
             }
         });
 
-
         chart.getXAxis().setValueFormatter(new com.github.mikephil.charting.formatter.ValueFormatter() {
             @Override
             public String getFormattedValue(float value) {
                 return String.format(Locale.getDefault(), "Day %d", (int) value + 1);
             }
         });
-
-
     }
 
     private class GetAllMoodsAsyncTask extends AsyncTask<Void, Void, List<Mood>> {
