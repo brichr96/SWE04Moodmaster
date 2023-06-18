@@ -8,6 +8,10 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
+    <uses-feature
+        android:name="android.hardware.sensor.light"
+        android:required="true" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -16,7 +20,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Moodmaster">
         <activity
-            android:name=".googleFit.Huawei_API"
+            android:name=".feelingScale_MoodShow.Walk"
+            android:exported="false" />
+        <activity
+            android:name=".feelingScale_MoodShow.Overview"
             android:exported="false" />
         <activity
             android:name=".feelingScale_MoodShow.FeelingScale"
