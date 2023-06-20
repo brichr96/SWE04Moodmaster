@@ -1,6 +1,7 @@
 package com.example.moodmaster.fragments;
 
 import android.content.Context;
+import android.content.Intent;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -9,6 +10,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -16,6 +18,9 @@ import android.widget.Toast;
 import androidx.fragment.app.Fragment;
 
 import com.example.moodmaster.R;
+import com.example.moodmaster.feelingScale_MoodShow.FeelingScale;
+import com.example.moodmaster.feelingScale_MoodShow.MapsActivity;
+import com.example.moodmaster.feelingScale_MoodShow.moods_tabbed;
 
 public class StepCounterFragment extends Fragment implements SensorEventListener {
 
@@ -48,6 +53,8 @@ public class StepCounterFragment extends Fragment implements SensorEventListener
         accel = 0.00f;
         accelCurrent = SensorManager.GRAVITY_EARTH;
         accelLast = SensorManager.GRAVITY_EARTH;
+
+
     }
 
     @Override
@@ -55,6 +62,17 @@ public class StepCounterFragment extends Fragment implements SensorEventListener
         View rootView = inflater.inflate(R.layout.fragment_moods_tabbed, container, false);
         stepCountTextView = rootView.findViewById(R.id.step_count_text);
         progressBar = rootView.findViewById(R.id.progress_bar);
+
+        Button walk_button = rootView.findViewById(R.id.buttonWalk);
+
+        walk_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getContext(), MapsActivity.class);
+                startActivity(intent);
+            }
+        });
+
         return rootView;
     }
 

@@ -28,6 +28,7 @@ android {
     buildFeatures {
         viewBinding true
     }
+    namespace 'com.example.moodmaster'
 }
 
 dependencies {
@@ -48,5 +49,16 @@ dependencies {
     implementation 'androidx.sqlite:sqlite:2.1.0'
     implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
     implementation 'com.google.android.gms:play-services-fitness:21.1.0'
+    //implementation 'com.huawei.hms:health:11.0.0.512'
+
+    implementation 'org.osmdroid:osmdroid-android:6.1.10'
+    implementation 'org.osmdroid:osmdroid-mapsforge:6.1.10'
+
+//    implementation 'com.squareup.okhttp3:okhttp:4.9.1'
+//    implementation 'com.google.code.gson:gson:2.8.8'
+
+    implementation 'com.google.android.gms:play-services-location:18.0.0'
+//    implementation 'com.google.maps.android:kml:2.3.0'
+//    implementation 'com.google.maps.android:android-maps-utils:2.2.1'
     implementation 'com.mikhaellopez:circularprogressbar:3.1.0'
 }

@@ -25,10 +25,7 @@
             android:label="@string/title_activity_moods_tabbed"
             android:theme="@style/Theme.Moodmaster.NoActionBar" />
         <activity
-            android:name=".feelingScale_MoodShow.Walk"
-            android:exported="false" />
-        <activity
-            android:name=".feelingScale_MoodShow.Overview"
+            android:name=".feelingScale_MoodShow.MapsActivity"
             android:exported="false" />
         <activity
             android:name=".feelingScale_MoodShow.FeelingScale"
@@ -42,7 +39,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".feelingScale_MoodShow.Mood_Show" />
     </application>
 
 </manifest>
