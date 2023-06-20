@@ -69,7 +69,7 @@ public class FeelingScale extends AppCompatActivity {
         ImageButton mButtonH = findViewById(R.id.happy);
         ImageButton mButtonM = findViewById(R.id.medium);
         ImageButton mButtonD = findViewById(R.id.disappointed);
-        ImageButton mButtonS = findViewById(R.id.disappointed);
+        ImageButton mButtonS = findViewById(R.id.sad);
 
 
 
@@ -78,7 +78,7 @@ public class FeelingScale extends AppCompatActivity {
             public void onClick(View view) {
                 Mood newMood = new Mood(5);
                 new InsertMoodAsyncTask().execute(newMood);
-                Intent intent = new Intent(FeelingScale.this, Overview.class );
+                Intent intent = new Intent(FeelingScale.this, moods_tabbed.class );
                 startActivity(intent);
             }
         });
@@ -88,7 +88,7 @@ public class FeelingScale extends AppCompatActivity {
             public void onClick(View view) {
                 Mood newMood = new Mood(4);
                 new InsertMoodAsyncTask().execute(newMood);
-                Intent intent = new Intent(FeelingScale.this, Overview.class );
+                Intent intent = new Intent(FeelingScale.this, Mood_Show.class );
                 startActivity(intent);
             }
         });

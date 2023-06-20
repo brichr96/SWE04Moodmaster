@@ -1,18 +1,19 @@
-package com.example.moodmaster.feelingScale_MoodShow;
+package com.example.moodmaster.fragments;
 
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.Button;
-import android.widget.TextView;
+import android.view.ViewGroup;
 
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 
-import com.example.moodmaster.mood_algo.Mood;
 import com.example.moodmaster.DB.MoodDao;
-import com.example.moodmaster.R;
 import com.example.moodmaster.DB.RoomDB;
+import com.example.moodmaster.R;
+import com.example.moodmaster.feelingScale_MoodShow.Mood_Show;
+import com.example.moodmaster.mood_algo.Mood;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
@@ -22,32 +23,27 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-public class Mood_Show extends AppCompatActivity {
+public class mood_tabbed_fragment extends Fragment {
     private LineChart chart;
     private MoodDao moodDao;
-    private Button login;
 
-    private TextView tvAverageMood;
+    public mood_tabbed_fragment() {
+        // Required empty public constructor
+    }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.mood_show);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        View view = inflater.inflate(R.layout.mood_show, container, false);
 
-        RoomDB roomDb = RoomDB.getInstance(getApplicationContext());
+        chart = view.findViewById(R.id.chart);
+
+        RoomDB roomDb = RoomDB.getInstance(getContext().getApplicationContext());
         moodDao = roomDb.moodDao();
-
-        chart = findViewById(R.id.chart);
-        login = findViewById(R.id.login); // Replace with the actual ID of the login button
 
         new GetAllMoodsAsyncTask().execute();
 
-        login.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // Handle login button click
-            }
-        });
+        return view;
     }
 
     private void generateLineChart(List<Mood> moods) {
