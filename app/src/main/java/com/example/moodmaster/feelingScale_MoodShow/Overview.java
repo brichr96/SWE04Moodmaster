@@ -30,7 +30,7 @@ public class Overview extends AppCompatActivity {
         walk_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(Overview.this, Walk.class);
+                Intent intent = new Intent(Overview.this, FeelingScale.class);
                 startActivity(intent);
             }
         });

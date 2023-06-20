@@ -17,7 +17,7 @@ import com.example.moodmaster.databinding.FragmentMoodsTabbedBinding;
 /**
  * A placeholder fragment containing a simple view.
  */
-public class    PlaceholderFragment extends Fragment {
+public class PlaceholderFragment extends Fragment {
 
     private static final String ARG_SECTION_NUMBER = "section_number";
 
@@ -51,7 +51,7 @@ public class    PlaceholderFragment extends Fragment {
         binding = FragmentMoodsTabbedBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        final TextView textView = binding.sectionLabel;
+        final TextView textView = binding.stepCountText;
         pageViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {
