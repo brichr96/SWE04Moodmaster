@@ -2,6 +2,7 @@ package com.example.moodmaster.fragments;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -39,7 +40,11 @@ public class StepCounterFragment extends Fragment implements SensorEventListener
     private TextView stepCountTextView;
     private ProgressBar progressBar;
 
-    private static final int STEP_GOAL = 10000;
+    private static final int STEP_GOAL = 50;
+
+    private SharedPreferences algoValues;
+
+    private final String KEY = "steps";
 
     public StepCounterFragment() {
         // Required empty public constructor
@@ -53,6 +58,8 @@ public class StepCounterFragment extends Fragment implements SensorEventListener
         accel = 0.00f;
         accelCurrent = SensorManager.GRAVITY_EARTH;
         accelLast = SensorManager.GRAVITY_EARTH;
+
+        algoValues = getContext().getSharedPreferences("algo", Context.MODE_PRIVATE);
 
 
     }
@@ -110,6 +117,7 @@ public class StepCounterFragment extends Fragment implements SensorEventListener
                     public void run() {
                         stepCountTextView.setText(String.valueOf(steps));
                         progressBar.setProgress(steps); // Update the ProgressBar progress
+                        saveSteps(steps);
 
                         if (steps >= STEP_GOAL) {
                             // Display the toast message
@@ -124,5 +132,11 @@ public class StepCounterFragment extends Fragment implements SensorEventListener
     @Override
     public void onAccuracyChanged(Sensor sensor, int accuracy) {
         // We don't need this in the current context.
+    }
+
+    private void saveSteps(int steps){
+        SharedPreferences.Editor editor = algoValues.edit();
+        editor.putInt(KEY, steps);
+        editor.apply();
     }
 }

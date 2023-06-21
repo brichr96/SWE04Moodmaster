@@ -46,11 +46,13 @@ public class FeelingScale extends AppCompatActivity {
             public void onSensorChanged(SensorEvent sensorEvent) {
                 float lux = sensorEvent.values[0];
 
+                System.out.println("----------LUXFEELI " + lux);
+
                 if(lux < 10){
-                    System.out.println("DUNKEL");
+//                    System.out.println("DUNKEL");
                 }
                 else{
-                    System.out.println("HELL");
+//                    System.out.println("HELL");
                 }
                 //System.out.println("LUX: " + lux);
             }
@@ -85,6 +87,7 @@ public class FeelingScale extends AppCompatActivity {
             public void onClick(View view) {
                 Mood newMood = new Mood(5);
                 new InsertMoodAsyncTask().execute(newMood);
+//                new GetAllMoodsAsyncTask().execute();
                 Intent intent = new Intent(FeelingScale.this, moods_tabbed.class );
                 startActivity(intent);
             }
@@ -194,8 +197,9 @@ public class FeelingScale extends AppCompatActivity {
         protected void onPostExecute(List<Mood> moods){
             super.onPostExecute(moods);
 
-            //for(Mood m : moods){
-            //  System.out.println("-----------------------------------MOOD: " + m.getMood()
+            for(Mood m : moods){
+              System.out.println("-----------------------------------MOOD: " + m.getMood());
+            }
         }
     }
 }
