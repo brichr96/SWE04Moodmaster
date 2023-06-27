@@ -31,12 +31,31 @@
         android:id="@+id/colorCircle"
         android:layout_width="200dp"
         android:layout_height="200dp"
+        android:background="@drawable/circle_shape"
         android:layout_centerInParent="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_average_mood" />
 
+    <TextView
+        android:id="@+id/valueText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="24sp"
+        android:textColor="#FFFFFF"
+        app:layout_constraintBottom_toBottomOf="@id/colorCircle"
+        app:layout_constraintEnd_toEndOf="@id/colorCircle"
+        app:layout_constraintStart_toStartOf="@id/colorCircle"
+        app:layout_constraintTop_toTopOf="@id/colorCircle" />
 
+    <ImageButton
+        android:id="@+id/emergencyButton"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:layout_margin="16dp"
+        android:background="@drawable/emergency"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

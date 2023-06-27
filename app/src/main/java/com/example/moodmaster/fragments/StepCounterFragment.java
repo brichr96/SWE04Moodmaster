@@ -10,12 +10,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 
+import com.example.moodmaster.EmergencyCall;
 import com.example.moodmaster.R;
+import com.example.moodmaster.feelingScale_MoodShow.FeelingScale;
 import com.example.moodmaster.feelingScale_MoodShow.MapsActivity;
 import com.example.moodmaster.feelingScale_MoodShow.StepCountService;
 
@@ -47,6 +50,15 @@ public class StepCounterFragment extends Fragment {
 
         stepCountTextView = rootView.findViewById(R.id.step_count_text);
         progressBar = rootView.findViewById(R.id.your_progress_bar_id);
+
+        ImageButton emergencyCall = rootView.findViewById(R.id.emergencyButton);
+
+        emergencyCall.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                EmergencyCall.showEmergencyCallConfirmationDialog(getActivity());
+            }
+        });
 
         Button walk_button = rootView.findViewById(R.id.buttonWalk);
         walk_button.setOnClickListener(new View.OnClickListener() {

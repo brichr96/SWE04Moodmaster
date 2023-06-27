@@ -100,12 +100,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 
+import com.example.moodmaster.EmergencyCall;
 import com.example.moodmaster.R;
 import com.example.moodmaster.feelingScale_MoodShow.FeelingScale;
 import com.example.moodmaster.feelingScale_MoodShow.MapsActivity;
@@ -146,6 +148,15 @@ public class LightTabFragment extends Fragment implements SensorEventListener {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.activity_light, container, false);
         displayLight = rootView.findViewById(R.id.luxValueText);
+
+        ImageButton emergencyCall = rootView.findViewById(R.id.emergencyButton);
+
+        emergencyCall.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                EmergencyCall.showEmergencyCallConfirmationDialog(getActivity());
+            }
+        });
 
         return rootView;
     }
@@ -189,8 +200,4 @@ public class LightTabFragment extends Fragment implements SensorEventListener {
         editor.putFloat(KEY, luxValue);
         editor.apply();
     }
-
-//    public float getLux() {
-//        return algoValues.getFloat(KEY, 0);
-//    }
 }

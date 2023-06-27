@@ -17,6 +17,7 @@ import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.moodmaster.EmergencyCall;
 import com.example.moodmaster.mood_algo.Mood;
 import com.example.moodmaster.DB.MoodDao;
 import com.example.moodmaster.DB.RoomDB;
@@ -52,6 +53,14 @@ public class FeelingScale extends AppCompatActivity {
         SensorManager sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
         Sensor lightSensor = sensorManager.getDefaultSensor(Sensor.TYPE_LIGHT);
         Button btnNext  = findViewById(R.id.btnnext);
+        ImageButton emergencyCall = findViewById(R.id.emergencyButton);
+
+        emergencyCall.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                EmergencyCall.showEmergencyCallConfirmationDialog(FeelingScale.this);
+            }
+        });
 
         SensorEventListener lightEventListener = new SensorEventListener() {
             @Override

@@ -3,17 +3,23 @@ package com.example.moodmaster.fragments;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.hardware.Sensor;
+import android.hardware.SensorManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
+import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 
 import com.example.moodmaster.DB.MoodDao;
 import com.example.moodmaster.DB.RoomDB;
+import com.example.moodmaster.EmergencyCall;
 import com.example.moodmaster.R;
+import com.example.moodmaster.feelingScale_MoodShow.FeelingScale;
 import com.example.moodmaster.mood_algo.Mood;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.AxisBase;
@@ -41,6 +47,8 @@ public class MoodTabbedFragment extends Fragment {
     private View colorCircle;
     private int colorStep;
 
+    private TextView valueText;
+
     public MoodTabbedFragment() {
         // Required empty public constructor
     }
@@ -50,6 +58,15 @@ public class MoodTabbedFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.mood_show, container, false);
 
+        ImageButton emergencyCall = view.findViewById(R.id.emergencyButton);
+
+        emergencyCall.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                EmergencyCall.showEmergencyCallConfirmationDialog(getActivity());
+            }
+        });
+
         chart = view.findViewById(R.id.chart);
 
         RoomDB roomDb = RoomDB.getInstance(getContext().getApplicationContext());
@@ -57,23 +74,34 @@ public class MoodTabbedFragment extends Fragment {
 
         colorCircle = view.findViewById(R.id.colorCircle);
 
+        valueText = view.findViewById(R.id.valueText);
+
         // Calculate color step based on the value (1 to 100)
-        int value = moodScore; // Replace with your value
-        colorStep = value / 10;
+
 
         // Set the background color of the circle based on the color step
 
         new GetAllMoodsAsyncTask().execute();
 
+//        System.out.println("MOOOOOD " + moodScore);
+
+
         return view;
     }
 
-    private void setColorCircleBackground() {
+    private void    setColorCircleBackground(int value) {
         // Calculate the color based on the color step
+        value = moodScore; // Replace with your value
+        colorStep = value / 10;
         int color = Color.rgb(255 - (colorStep * 25), colorStep * 25, 0);
 
         // Set the background color of the circle
         colorCircle.setBackgroundColor(color);
+    }
+
+    private void updateValueText(int value) {
+        // Update the text of the value textview
+        valueText.setText(String.valueOf(value));
     }
 
     private void generateLineChart(List<Mood> moods) {
@@ -233,8 +261,11 @@ public class MoodTabbedFragment extends Fragment {
             algoValues = getContext().getSharedPreferences("algo", Context.MODE_PRIVATE);
             generateLineChart(moods);
             getLastSevenMoodValues(moods);
-            setColorCircleBackground();
+//            updateValueText(moodScore);
+//            setColorCircleBackground();
             moodScore = calculateOverallMoodScore(getLastSevenMoodValues(moods), getLux(), getSteps());
+            updateValueText(moodScore);
+            setColorCircleBackground(moodScore);
             System.out.println("MOOD SCORE----------" + moodScore);
         }
     }
