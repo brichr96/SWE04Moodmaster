@@ -45,7 +45,16 @@ public class FeelingScale extends AppCompatActivity {
             @Override
             public void onSensorChanged(SensorEvent sensorEvent) {
                 float lux = sensorEvent.values[0];
-                System.out.println("LUX: " + lux);
+
+                System.out.println("----------LUXFEELI " + lux);
+
+                if(lux < 10){
+//                    System.out.println("DUNKEL");
+                }
+                else{
+//                    System.out.println("HELL");
+                }
+                //System.out.println("LUX: " + lux);
             }
 
 
@@ -69,7 +78,7 @@ public class FeelingScale extends AppCompatActivity {
         ImageButton mButtonH = findViewById(R.id.happy);
         ImageButton mButtonM = findViewById(R.id.medium);
         ImageButton mButtonD = findViewById(R.id.disappointed);
-        ImageButton mButtonS = findViewById(R.id.disappointed);
+        ImageButton mButtonS = findViewById(R.id.sad);
 
 
 
@@ -78,7 +87,8 @@ public class FeelingScale extends AppCompatActivity {
             public void onClick(View view) {
                 Mood newMood = new Mood(5);
                 new InsertMoodAsyncTask().execute(newMood);
-                Intent intent = new Intent(FeelingScale.this, Overview.class );
+//                new GetAllMoodsAsyncTask().execute();
+                Intent intent = new Intent(FeelingScale.this, moods_tabbed.class );
                 startActivity(intent);
             }
         });
@@ -88,7 +98,7 @@ public class FeelingScale extends AppCompatActivity {
             public void onClick(View view) {
                 Mood newMood = new Mood(4);
                 new InsertMoodAsyncTask().execute(newMood);
-                Intent intent = new Intent(FeelingScale.this, Overview.class );
+                Intent intent = new Intent(FeelingScale.this, moods_tabbed.class );
                 startActivity(intent);
             }
         });
@@ -98,7 +108,7 @@ public class FeelingScale extends AppCompatActivity {
             public void onClick(View view) {
                 Mood newMood = new Mood(3);
                 new InsertMoodAsyncTask().execute(newMood);
-                Intent intent = new Intent(FeelingScale.this, Overview.class );
+                Intent intent = new Intent(FeelingScale.this, moods_tabbed.class );
                 startActivity(intent);
             }
         });
@@ -108,20 +118,22 @@ public class FeelingScale extends AppCompatActivity {
             public void onClick(View view) {
                 Mood newMood = new Mood(2);
                 new InsertMoodAsyncTask().execute(newMood);
-                Intent intent = new Intent(FeelingScale.this, Overview.class );
+                Intent intent = new Intent(FeelingScale.this, moods_tabbed.class );
                 startActivity(intent);
             }
         });
 
-        mButtonM.setOnClickListener(new View.OnClickListener() {
+        mButtonS.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Mood newMood = new Mood(1);
                 new InsertMoodAsyncTask().execute(newMood);
-                Intent intent = new Intent(FeelingScale.this, Overview.class );
+                Intent intent = new Intent(FeelingScale.this, moods_tabbed.class );
                 startActivity(intent);
             }
         });
+
+
 
 
 
@@ -185,8 +197,9 @@ public class FeelingScale extends AppCompatActivity {
         protected void onPostExecute(List<Mood> moods){
             super.onPostExecute(moods);
 
-            //for(Mood m : moods){
-            //  System.out.println("-----------------------------------MOOD: " + m.getMood()
+            for(Mood m : moods){
+              System.out.println("-----------------------------------MOOD: " + m.getMood());
+            }
         }
     }
 }

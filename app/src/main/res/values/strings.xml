@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Moodmaster</string>
+    <string name="title_activity_moods_tabbed">moods_tabbed</string>
+    <string name="tab_text_1">Mood</string>
+    <string name="tab_text_2">Steps</string>
+    <string name="tab_text_3">Light</string>
 </resources>
