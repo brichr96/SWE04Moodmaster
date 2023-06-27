@@ -16,9 +16,14 @@ import com.example.moodmaster.DB.RoomDB;
 import com.example.moodmaster.R;
 import com.example.moodmaster.mood_algo.Mood;
 import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.components.AxisBase;
+import com.github.mikephil.charting.components.XAxis;
+import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
+import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
+import com.github.mikephil.charting.formatter.ValueFormatter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,7 +36,6 @@ public class MoodTabbedFragment extends Fragment {
     private SharedPreferences algoValues;
 
     private final String KEY = "luxValue";
-
     private final String KEY2 = "steps";
 
     private int moodScore;
@@ -42,8 +46,6 @@ public class MoodTabbedFragment extends Fragment {
     public MoodTabbedFragment() {
         // Required empty public constructor
     }
-
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -63,7 +65,6 @@ public class MoodTabbedFragment extends Fragment {
 
         // Set the background color of the circle based on the color step
 
-
         new GetAllMoodsAsyncTask().execute();
 
         return view;
@@ -79,11 +80,12 @@ public class MoodTabbedFragment extends Fragment {
 
     private void generateLineChart(List<Mood> moods) {
         List<Entry> entries = new ArrayList<>();
+        ArrayList<String> xLabels = new ArrayList<>(); // List to store the day labels
         int moodIndex = 0;
         for (Mood mood : moods) {
             entries.add(new Entry(moodIndex, mood.getMood()));
+            xLabels.add("Day " + (moodIndex + 1)); // Add the day label
             moodIndex++;
-//            System.out.println("-----------------------------------MOOD: " + mood.getMood());
         }
 
         LineDataSet dataSet = new LineDataSet(entries, "Mood over time");
@@ -97,16 +99,17 @@ public class MoodTabbedFragment extends Fragment {
             chart.setData(lineData);
             chart.invalidate();
 
-            chart.getAxisLeft().setAxisMaximum(5);
-            chart.getAxisLeft().setAxisMinimum(1);
-            chart.getAxisLeft().setGranularity(1f);
-            chart.getAxisRight().setEnabled(false);
-            chart.getDescription().setEnabled(false);
+            XAxis xAxis = chart.getXAxis();
+            xAxis.setValueFormatter(new IndexAxisValueFormatter(xLabels)); // Set the labels
+            xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
+            xAxis.setGranularity(1f);
+            xAxis.setDrawGridLines(false);
+            xAxis.setLabelCount(xLabels.size()); // Set the number of x-labels to display
 
-            // Set custom Y-Axis labels
-            chart.getAxisLeft().setValueFormatter(new com.github.mikephil.charting.formatter.ValueFormatter() {
+            YAxis yAxisLeft = chart.getAxisLeft();
+            yAxisLeft.setValueFormatter(new ValueFormatter() {
                 @Override
-                public String getFormattedValue(float value) {
+                public String getAxisLabel(float value, AxisBase axis) {
                     int intValue = (int) value;
                     switch (intValue) {
                         case 1:
@@ -125,25 +128,14 @@ public class MoodTabbedFragment extends Fragment {
                 }
             });
 
-            chart.getXAxis().setValueFormatter(new com.github.mikephil.charting.formatter.ValueFormatter() {
-                @Override
-                public String getFormattedValue(float value) {
-                    return String.format(Locale.getDefault(), "Day %d", (int) value + 1);
-                }
-            });
+            chart.getAxisRight().setEnabled(false);
+            chart.getDescription().setEnabled(false);
         }
     }
 
-    public void calcMood(){
-//        try {
-//            LightTabFragment light = new LightTabFragment();
-//            float lux = light.getLux();
-//
-//            System.out.println("-----------------LUCHS " + lux);
-//        } catch (Exception e) {
-////            throw new RuntimeException(e);
-//        }
 
+
+    public void calcMood() {
         System.out.println("CALC");
 
         try {
@@ -151,14 +143,12 @@ public class MoodTabbedFragment extends Fragment {
             int steps = getSteps();
             System.out.println("----------LUCHSTEPS  " + lux + " - " + steps);
         } catch (Exception e) {
-
+            e.printStackTrace();
         }
-
     }
 
     public int calculateOverallMoodScore(int[] moodValues, float light, int steps) {
         // Define weightage
-
         float maxLightValue = 150f;
         float maxStepsCount = 10000f;
         float moodWeightage = 0.8f;
@@ -193,7 +183,6 @@ public class MoodTabbedFragment extends Fragment {
         return roundedMoodScore;
     }
 
-
     public int[] getLastSevenMoodValues(List<Mood> moods) {
         int[] lastSevenMoodsValues;
 
@@ -208,14 +197,7 @@ public class MoodTabbedFragment extends Fragment {
             // Copy the elements from the sublist to the int array
             for (int i = 0; i < lastSevenMoods.size(); i++) {
                 lastSevenMoodsValues[i] = lastSevenMoods.get(i).getMood();
-//                System.out.println("MOOD: ------------ " + lastSevenMoodsValues[i]);
             }
-
-//            for (Mood mood : lastSevenMoods) {
-//                mood.getMood()
-//            }
-
-
         } else {
             // Handle the case when moodList does not have enough entries
             // For example, you could throw an exception, return null, or initialize the array with default values
@@ -225,12 +207,11 @@ public class MoodTabbedFragment extends Fragment {
         return lastSevenMoodsValues;
     }
 
-
-    private float getLux(){
+    private float getLux() {
         return algoValues.getFloat(KEY, 0);
     }
 
-    private int getSteps(){
+    private int getSteps() {
         return algoValues.getInt(KEY2, 0);
     }
 
@@ -249,8 +230,6 @@ public class MoodTabbedFragment extends Fragment {
             setColorCircleBackground();
             moodScore = calculateOverallMoodScore(getLastSevenMoodValues(moods), getLux(), getSteps());
             System.out.println("MOOD SCORE----------" + moodScore);
-
-
         }
     }
 }

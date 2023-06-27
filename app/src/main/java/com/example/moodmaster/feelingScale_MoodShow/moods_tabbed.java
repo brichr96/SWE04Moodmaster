@@ -1,36 +1,21 @@
 package com.example.moodmaster.feelingScale_MoodShow;
 
-import android.graphics.Color;
-import android.os.AsyncTask;
 import android.os.Bundle;
 
-import com.example.moodmaster.DB.MoodDao;
-import com.example.moodmaster.DB.RoomDB;
-import com.example.moodmaster.R;
-import com.example.moodmaster.mood_algo.Mood;
-import com.github.mikephil.charting.charts.LineChart;
-import com.github.mikephil.charting.data.Entry;
-import com.github.mikephil.charting.data.LineData;
-import com.github.mikephil.charting.data.LineDataSet;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
-import com.google.android.material.tabs.TabLayout;
-
-import androidx.viewpager.widget.ViewPager;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.viewpager.widget.ViewPager;
 
-import android.view.View;
-
-import com.example.moodmaster.feelingScale_MoodShow.ui.main.SectionsPagerAdapter;
+import com.example.moodmaster.DB.MoodDao;
+import com.example.moodmaster.R;
 import com.example.moodmaster.databinding.ActivityMoodsTabbedBinding;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
+import com.example.moodmaster.feelingScale_MoodShow.ui.main.SectionsPagerAdapter;
+import com.github.mikephil.charting.charts.LineChart;
+import com.google.android.material.tabs.TabLayout;
 
 public class moods_tabbed extends AppCompatActivity {
 
     private ActivityMoodsTabbedBinding binding;
+
     private MoodDao moodDao;
 
     private LineChart chart;
