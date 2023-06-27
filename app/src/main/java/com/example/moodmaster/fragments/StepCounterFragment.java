@@ -1,12 +1,10 @@
 package com.example.moodmaster.fragments;
 
+import android.app.ActivityManager;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.hardware.Sensor;
-import android.hardware.SensorEvent;
-import android.hardware.SensorEventListener;
-import android.hardware.SensorManager;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,37 +12,20 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 
 import com.example.moodmaster.R;
-import com.example.moodmaster.feelingScale_MoodShow.FeelingScale;
 import com.example.moodmaster.feelingScale_MoodShow.MapsActivity;
-import com.example.moodmaster.feelingScale_MoodShow.moods_tabbed;
+import com.example.moodmaster.feelingScale_MoodShow.StepCountService;
 
-public class StepCounterFragment extends Fragment implements SensorEventListener {
-
-    private SensorManager sensorManager;
-    private Sensor accelerometer;
-
-    private float accel; // acceleration apart from gravity
-    private float accelCurrent; // current acceleration including gravity
-    private float accelLast; // last acceleration including gravity
-
-    private int steps;
-
-    private long lastStepTime; // Timestamp of the last step
-    private long stepDelay = 250; // Delay (in ms) to avoid counting steps too close together
+public class StepCounterFragment extends Fragment {
 
     private TextView stepCountTextView;
     private ProgressBar progressBar;
-
-    private static final int STEP_GOAL = 50;
-
-    private SharedPreferences algoValues;
-
+    private int steps;
     private final String KEY = "steps";
+    private static final int STEP_GOAL = 10000;
 
     public StepCounterFragment() {
         // Required empty public constructor
@@ -53,25 +34,21 @@ public class StepCounterFragment extends Fragment implements SensorEventListener
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        sensorManager = (SensorManager) getActivity().getSystemService(Context.SENSOR_SERVICE);
-        accelerometer = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
-        accel = 0.00f;
-        accelCurrent = SensorManager.GRAVITY_EARTH;
-        accelLast = SensorManager.GRAVITY_EARTH;
-
-        algoValues = getContext().getSharedPreferences("algo", Context.MODE_PRIVATE);
-
-
+        IntentFilter filter = new IntentFilter();
+        filter.addAction(Intent.ACTION_BOOT_COMPLETED);
+        filter.addAction("com.example.moodmaster.STEPS_UPDATE");
+        getActivity().registerReceiver(broadcastReceiver, filter);
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_moods_tabbed, container, false);
+
         stepCountTextView = rootView.findViewById(R.id.step_count_text);
-        progressBar = rootView.findViewById(R.id.progress_bar);
+        progressBar = rootView.findViewById(R.id.your_progress_bar_id);
 
         Button walk_button = rootView.findViewById(R.id.buttonWalk);
-
         walk_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -86,57 +63,51 @@ public class StepCounterFragment extends Fragment implements SensorEventListener
     @Override
     public void onResume() {
         super.onResume();
-        sensorManager.registerListener(this, accelerometer, SensorManager.SENSOR_DELAY_NORMAL);
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-        sensorManager.unregisterListener(this);
-    }
-
-    @Override
-    public void onSensorChanged(SensorEvent event) {
-        float x = event.values[0];
-        float y = event.values[1];
-        float z = event.values[2];
-
-        accelLast = accelCurrent;
-        accelCurrent = (float) Math.sqrt((double) (x * x + y * y + z * z));
-        float delta = accelCurrent - accelLast;
-        accel = accel * 0.9f + delta; // perform low-cut filter
-
-        if (accel > 2.5f) { // this threshold is for a significant step, adjust as needed
-            long currentTime = System.currentTimeMillis();
-            if ((currentTime - lastStepTime) > stepDelay) { // avoid counting steps too close together
-                steps++;
-                lastStepTime = currentTime;
-
-                getActivity().runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        stepCountTextView.setText(String.valueOf(steps));
-                        progressBar.setProgress(steps); // Update the ProgressBar progress
-                        saveSteps(steps);
-
-                        if (steps >= STEP_GOAL) {
-                            // Display the toast message
-                            Toast.makeText(getActivity(), "Congratulations! You've reached your step goal!", Toast.LENGTH_LONG).show();
-                        }
-                    }
-                });
-            }
+        if (!isServiceRunning(StepCountService.class)) {
+            Intent intent = new Intent(getContext(), StepCountService.class);
+            getActivity().startService(intent);
         }
     }
 
     @Override
-    public void onAccuracyChanged(Sensor sensor, int accuracy) {
-        // We don't need this in the current context.
+    public void onDestroy() {
+        super.onDestroy();
+        getActivity().unregisterReceiver(broadcastReceiver);
     }
 
-    private void saveSteps(int steps){
-        SharedPreferences.Editor editor = algoValues.edit();
-        editor.putInt(KEY, steps);
-        editor.apply();
+    private boolean isServiceRunning(Class<?> serviceClass) {
+        ActivityManager manager = (ActivityManager) getContext().getSystemService(Context.ACTIVITY_SERVICE);
+        for (ActivityManager.RunningServiceInfo service : manager.getRunningServices(Integer.MAX_VALUE)) {
+            if (serviceClass.getName().equals(service.service.getClassName())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            // Receiving the broadcast when the device finishes rebooting
+            if (intent.getAction().equals(Intent.ACTION_BOOT_COMPLETED)) {
+                // Start the StepCountService again after reboot
+                Intent serviceIntent = new Intent(context, StepCountService.class);
+                context.startService(serviceIntent);
+            } else if (intent.getAction().equals("com.example.moodmaster.STEPS_UPDATE")) {
+                // Update steps count when broadcast received
+                steps = intent.getIntExtra("steps", 0);
+                loadSteps();
+            }
+        }
+    };
+
+    private void loadSteps() {
+        if (stepCountTextView != null) {
+            stepCountTextView.setText(String.valueOf(steps));
+        }
+        if (progressBar != null) {
+            int progress = (int) (((float) steps / STEP_GOAL) * 100);
+            progressBar.setProgress(progress);
+        }
     }
 }

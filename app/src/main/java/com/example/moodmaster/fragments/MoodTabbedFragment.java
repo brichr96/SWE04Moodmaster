@@ -22,12 +22,10 @@ import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
-import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
 import com.github.mikephil.charting.formatter.ValueFormatter;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 public class MoodTabbedFragment extends Fragment {
     private LineChart chart;
@@ -80,11 +78,11 @@ public class MoodTabbedFragment extends Fragment {
 
     private void generateLineChart(List<Mood> moods) {
         List<Entry> entries = new ArrayList<>();
-        ArrayList<String> xLabels = new ArrayList<>(); // List to store the day labels
+        ArrayList<String> xLabels = new ArrayList<>();
         int moodIndex = 0;
         for (Mood mood : moods) {
             entries.add(new Entry(moodIndex, mood.getMood()));
-            xLabels.add("Day " + (moodIndex + 1)); // Add the day label
+            xLabels.add("" + (moodIndex + 1));
             moodIndex++;
         }
 
@@ -100,11 +98,20 @@ public class MoodTabbedFragment extends Fragment {
             chart.invalidate();
 
             XAxis xAxis = chart.getXAxis();
-            xAxis.setValueFormatter(new IndexAxisValueFormatter(xLabels)); // Set the labels
             xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
-            xAxis.setGranularity(1f);
             xAxis.setDrawGridLines(false);
-            xAxis.setLabelCount(xLabels.size()); // Set the number of x-labels to display
+            xAxis.setGranularity(1f);
+            xAxis.setLabelCount(xLabels.size());
+            xAxis.setValueFormatter(new ValueFormatter() {
+                @Override
+                public String getFormattedValue(float value) {
+                    int intValue = (int) value;
+                    if (intValue < xLabels.size()) {
+                        return xLabels.get(intValue);
+                    }
+                    return "";
+                }
+            });
 
             YAxis yAxisLeft = chart.getAxisLeft();
             yAxisLeft.setValueFormatter(new ValueFormatter() {
@@ -199,8 +206,7 @@ public class MoodTabbedFragment extends Fragment {
                 lastSevenMoodsValues[i] = lastSevenMoods.get(i).getMood();
             }
         } else {
-            // Handle the case when moodList does not have enough entries
-            // For example, you could throw an exception, return null, or initialize the array with default values
+
             lastSevenMoodsValues = new int[7]; // Initialize with default values of 0
         }
 
