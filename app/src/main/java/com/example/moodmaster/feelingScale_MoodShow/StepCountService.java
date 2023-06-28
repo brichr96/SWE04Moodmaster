@@ -22,7 +22,7 @@ public class StepCountService extends Service implements SensorEventListener {
     private int steps;
 
     private long lastStepTime;
-    private long stepDelay = 50;
+    private long stepDelay = 500;
 
     private SharedPreferences algoValues;
     private final String KEY = "steps";
@@ -61,7 +61,7 @@ public class StepCountService extends Service implements SensorEventListener {
         accel = Math.abs(accelCurrent - accelLast);
 
         long currentTime = System.currentTimeMillis();
-        if (accel > 0.2 && (currentTime - lastStepTime) > stepDelay) {
+        if (accel > 2.3f && (currentTime - lastStepTime) > stepDelay) {
             steps++;
             lastStepTime = currentTime;
             saveSteps(steps);

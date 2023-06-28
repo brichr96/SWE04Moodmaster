@@ -189,25 +189,21 @@ public class LightTabFragment extends Fragment implements SensorEventListener {
         lux = event.values[0];
         saveLux(lux);
 
-//        System.out.println("TEST-------------" + getLux());
-
-        System.out.println("----------LUXLIGHT " + lux);
-
         getActivity().runOnUiThread(new Runnable() {
             @Override
             public void run() {
 
                 if(lux < 50){
-                    displayLight.setText("DARK");
+                    displayLight.setText(R.string.dark);
                 }
                 else if(lux >= 50 && lux < 100){
-                    displayLight.setText("DIM");
+                    displayLight.setText(R.string.dim);
                 }
                 else if(lux >= 100 && lux < 10000){
-                    displayLight.setText("BRIGHT");
+                    displayLight.setText(R.string.bright);
                 }
                 else{
-                    displayLight.setText("SUNLIGHT");
+                    displayLight.setText(R.string.sunlight);
                 }
 
             }

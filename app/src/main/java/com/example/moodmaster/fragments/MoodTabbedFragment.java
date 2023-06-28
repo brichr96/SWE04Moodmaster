@@ -83,13 +83,12 @@ public class MoodTabbedFragment extends Fragment {
 
         new GetAllMoodsAsyncTask().execute();
 
-//        System.out.println("MOOOOOD " + moodScore);
 
 
         return view;
     }
 
-    private void    setColorCircleBackground(int value) {
+    private void setColorCircleBackground(int value) {
         // Calculate the color based on the color step
         value = moodScore; // Replace with your value
         colorStep = value / 10;
@@ -101,7 +100,9 @@ public class MoodTabbedFragment extends Fragment {
 
     private void updateValueText(int value) {
         // Update the text of the value textview
-        valueText.setText(String.valueOf(value));
+        String text = String.valueOf(value) + "%";
+
+        valueText.setText(text);
     }
 
     private void generateLineChart(List<Mood> moods) {
@@ -114,7 +115,7 @@ public class MoodTabbedFragment extends Fragment {
             moodIndex++;
         }
 
-        LineDataSet dataSet = new LineDataSet(entries, "Mood over time");
+        LineDataSet dataSet = new LineDataSet(entries, getString(R.string.mood_over_time));
         dataSet.setDrawCircles(false);
         dataSet.setColor(Color.GREEN);
         dataSet.setDrawValues(false);
@@ -168,23 +169,9 @@ public class MoodTabbedFragment extends Fragment {
         }
     }
 
-
-
-    public void calcMood() {
-        System.out.println("CALC");
-
-        try {
-            float lux = getLux();
-            int steps = getSteps();
-            System.out.println("----------LUCHSTEPS  " + lux + " - " + steps);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
     public int calculateOverallMoodScore(int[] moodValues, float light, int steps) {
         // Define weightage
-        float maxLightValue = 150f;
+        float maxLightValue = 10000f;
         float maxStepsCount = 10000f;
         float moodWeightage = 0.8f;
         float lightWeightage = 0.1f;
@@ -194,15 +181,22 @@ public class MoodTabbedFragment extends Fragment {
         float sumMood = 0;
         for (int i = 0; i < moodValues.length; i++) {
             sumMood += moodValues[i];
+            System.out.println("mood " + moodValues[i]);
         }
         float averageMood = sumMood / moodValues.length;
+        System.out.println("avg mood " + averageMood);
 
         // Normalize average mood value
         float normalizedMood = (averageMood - 1) / 4;
+        System.out.println("norm mood " + normalizedMood);
 
         // Normalize other inputs
         float normalizedLight = light / maxLightValue;
+        System.out.println("light " + light);
+        System.out.println("norm light " + normalizedLight);
         float normalizedSteps = (float) steps / maxStepsCount;
+        System.out.println("steps " + steps);
+        System.out.println("norm steps " + normalizedSteps);
 
         // Calculate weighted sum
         float weightedMood = normalizedMood * moodWeightage;
@@ -234,8 +228,17 @@ public class MoodTabbedFragment extends Fragment {
                 lastSevenMoodsValues[i] = lastSevenMoods.get(i).getMood();
             }
         } else {
-
-            lastSevenMoodsValues = new int[7]; // Initialize with default values of 0
+            if(moods.size() > 0) {
+                List<Mood> lastSevenMoods = moods.subList(0, moods.size());
+                lastSevenMoodsValues = new int[moods.size()]; // Initialize with default values of 0
+                for (int i = 0; i < lastSevenMoods.size(); i++) {
+                    lastSevenMoodsValues[i] = lastSevenMoods.get(i).getMood();
+                }
+            }
+            else{
+                System.out.println("Moods empty, should not happen.");
+                return null;
+            }
         }
 
         return lastSevenMoodsValues;

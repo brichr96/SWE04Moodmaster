@@ -161,7 +161,7 @@ public class MapsActivity extends AppCompatActivity {
                 public void run() {
                     // Start the desired activity after the delay
                     openGoogleMaps(latitude, longitude, destination.latitude, destination.longitude);
-                    Toast.makeText(MapsActivity.this, "Location loaded!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MapsActivity.this, R.string.location_loaded, Toast.LENGTH_SHORT).show();
                 }
             }, 2500);
 
@@ -171,7 +171,7 @@ public class MapsActivity extends AppCompatActivity {
 
 
         } else {
-            Toast.makeText(this, "Unable to get current location", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.no_location, Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -286,7 +286,7 @@ public class MapsActivity extends AppCompatActivity {
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 startLocationUpdates();
             } else {
-                Toast.makeText(this, "Location permission denied", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, R.string.location_denied, Toast.LENGTH_SHORT).show();
             }
         }
     }

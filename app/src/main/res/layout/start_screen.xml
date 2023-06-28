@@ -34,7 +34,8 @@
         android:layout_centerHorizontal="true"
         android:layout_marginEnd="140dp"
         android:layout_marginBottom="32dp"
-        android:text="Loading your feelings"
+        android:textAlignment="center"
+        android:text="@string/loading_your_feelings"
         android:textColor="#8FBC8F"
         android:textSize="13sp" />
 </RelativeLayout>

@@ -2,6 +2,32 @@
     <string name="app_name">Moodmaster</string>
     <string name="title_activity_moods_tabbed">moods_tabbed</string>
     <string name="tab_text_1">Mood</string>
-    <string name="tab_text_2">Steps</string>
-    <string name="tab_text_3">Light</string>
+    <string name="tab_text_2">Move</string>
+    <string name="tab_text_3">Relax</string>
+    <string name="start_breathing_exercise">Start breathing exercise</string>
+    <string name="current_ambient_light">Current Ambient Light</string>
+    <string name="stop">Stop</string>
+    <string name="start_walking">Start Walking</string>
+    <string name="total_steps">Total Steps</string>
+    <string name="loading_location">Loading Location...</string>
+    <string name="how_are_you_feeling_today">How are you feeling today?</string>
+    <string name="next">Next</string>
+    <string name="loading_your_feelings">Loading your feelings</string>
+    <string name="dark">DARK</string>
+    <string name="dim">DIM</string>
+    <string name="bright">BRIGHT</string>
+    <string name="sunlight">SUNLIGHT</string>
+    <string name="emergency_dialog">Are you sure you want to call the emergency contact?</string>
+    <string name="confirmation">Confirmation</string>
+    <string name="call">Call</string>
+    <string name="cancel">Cancel</string>
+    <string name="location_loaded">Location loaded!</string>
+    <string name="no_location">Unable to get current location</string>
+    <string name="location_denied">Location permission denied</string>
+    <string name="mood_over_time">Mood over time</string>
+    <string name="in">BREATHE IN</string>
+    <string name="out">BREATHE OUT</string>
+    <string name="mood_prediction">Mood Prediction:</string>
+
+
 </resources>

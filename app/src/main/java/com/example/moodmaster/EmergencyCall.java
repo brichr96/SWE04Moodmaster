@@ -11,20 +11,23 @@ public class EmergencyCall {
 
 //    private static String phoneNumber = "06502729621";
 
-    private static String phoneNumber = "0676840004555";
+//    private static String phoneNumber = "0676840004555";
+
+    private static String phoneNumber = "06649174774";
+
 
     public static void showEmergencyCallConfirmationDialog(Activity activity) {
         AlertDialog.Builder builder = new AlertDialog.Builder(activity);
-        builder.setTitle("Confirmation");
-        builder.setMessage("Are you sure you want to call the emergency contact?");
-        builder.setPositiveButton("Call", new DialogInterface.OnClickListener() {
+        builder.setTitle(R.string.confirmation);
+        builder.setMessage(R.string.emergency_dialog);
+        builder.setPositiveButton(R.string.call, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 // Call the emergency contact
                 makeCall(activity);
             }
         });
-        builder.setNegativeButton("Cancel", null);
+        builder.setNegativeButton(R.string.cancel, null);
         builder.show();
     }
 

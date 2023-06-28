@@ -62,28 +62,6 @@ public class FeelingScale extends AppCompatActivity {
             }
         });
 
-        SensorEventListener lightEventListener = new SensorEventListener() {
-            @Override
-            public void onSensorChanged(SensorEvent sensorEvent) {
-                float lux = sensorEvent.values[0];
-                System.out.println("----------LUXFEELI " + lux);
-
-                if (lux < 10) {
-                    // System.out.println("DUNKEL");
-                } else {
-                    // System.out.println("HELL");
-                }
-                // System.out.println("LUX: " + lux);
-            }
-
-            @Override
-            public void onAccuracyChanged(Sensor sensor, int i) {
-                // Do nothing
-            }
-        };
-
-        sensorManager.registerListener(lightEventListener, lightSensor, SensorManager.SENSOR_DELAY_NORMAL);
-
         // Instantiate your DBHandler
         RoomDB roomDb = RoomDB.getInstance(getApplicationContext());
         moodDao = roomDb.moodDao();
@@ -161,16 +139,22 @@ public class FeelingScale extends AppCompatActivity {
         btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startNewActivity(1);
+                /////////////////////TODO//////////////////////
+                //check if no moods -> dialog, alert, toast
+                //not possible
+
+                Intent intent = new Intent(FeelingScale.this, moods_tabbed.class);
+                startActivity(intent);
             }
         });
 
         // List of moods (replace with your actual drawable resources)
         moods = new int[]{
-                R.drawable.ic_smiley_happy,
                 R.drawable.ic_smiley_super_happy,
+                R.drawable.ic_smiley_happy,
+                R.drawable.ic_smiley_normal,
                 R.drawable.ic_smiley_sad,
-                R.drawable.ic_smiley_disappointed,
+                R.drawable.ic_smiley_disappointed
         };
 
         currentMood = 0; // Start with the first mood

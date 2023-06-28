@@ -24,11 +24,12 @@
 
     <TextView
         android:id="@+id/step_count_text"
-        android:layout_width="39dp"
-        android:layout_height="32dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginTop="36dp"
+        android:textAlignment="center"
         android:text="0"
-        android:textSize="25dp"
+        android:textSize="48dp"
         android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
@@ -40,7 +41,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="96dp"
-        android:text="Start Walking"
+        android:text="@string/start_walking"
 
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -51,7 +52,7 @@
         android:layout_width="133dp"
         android:layout_height="41dp"
         android:layout_marginBottom="24dp"
-        android:text="Total Steps"
+        android:text="@string/total_steps"
         android:textSize="25dp"
         android:textColor="@color/black"
         app:layout_constraintBottom_toTopOf="@+id/buttonWalk"
