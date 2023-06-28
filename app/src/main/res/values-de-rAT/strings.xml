@@ -28,4 +28,7 @@
     <string name="mood_over_time">Stimmung über Zeit</string>
     <string name="out">AUSATMEN</string>
     <string name="in">EINATMEN</string>
+    <string name="mood_prediction">Stimmungsprognose</string>
+    <string name="choose_mood">Bitte Stimmung auswählen</string>
+    <string name="choose_mood2">Bitte Stimmung auswählen</string>
 </resources>

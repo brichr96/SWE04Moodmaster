@@ -14,6 +14,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -73,6 +74,8 @@ public class FeelingScale extends AppCompatActivity {
         ImageButton mButtonM = findViewById(R.id.medium);
         ImageButton mButtonD = findViewById(R.id.disappointed);
         ImageButton mButtonS = findViewById(R.id.sad);
+
+
 
 
         mButtonVH.setOnClickListener(new View.OnClickListener() {
@@ -139,12 +142,43 @@ public class FeelingScale extends AppCompatActivity {
         btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                /////////////////////TODO//////////////////////
+                /////////////////////
                 //check if no moods -> dialog, alert, toast
                 //not possible
 
-                Intent intent = new Intent(FeelingScale.this, moods_tabbed.class);
-                startActivity(intent);
+                new GetAllMoodsAsyncTask(){
+
+                    @Override
+                    protected void onPostExecute(List<Mood> moods_check){
+//                        for(Mood mood : moods_check){
+//                            System.out.println(moods_check.size() + "mood " + mood.getMood());
+//                        }
+//
+//                        Mood first = moods_check.get(0);
+//
+//                        while(first.getMood() == 5){
+//                            Toast.makeText(FeelingScale.this, "CHOOSE", Toast.LENGTH_SHORT).show();
+//                            recreate();
+//                        }
+
+                        if(moods_check.isEmpty()){
+                            Toast.makeText(FeelingScale.this, R.string.choose_mood, Toast.LENGTH_SHORT).show();
+//                          recreate();
+                        }
+                        else{
+                            Intent intent = new Intent(FeelingScale.this, moods_tabbed.class);
+                            startActivity(intent);
+                        }
+                    }
+                }.execute();
+
+
+//                List<Mood> moods_check = moodDao.getAllMoods();
+//                for(Mood mood : moods_check){
+//                    System.out.println(moods_check.size() + "mood " + mood.getMood());
+//                }
+
+
             }
         });
 
@@ -251,6 +285,13 @@ public class FeelingScale extends AppCompatActivity {
         protected Void doInBackground(Mood... moods) {
             moodDao.insert(moods[0]);
             return null;
+        }
+    }
+
+    private class GetAllMoodsAsyncTask extends AsyncTask<Void, Void, List<Mood>> {
+        @Override
+        protected List<Mood> doInBackground(Void... voids) {
+            return moodDao.getAllMoods();
         }
     }
 }

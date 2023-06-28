@@ -28,6 +28,8 @@
     <string name="in">BREATHE IN</string>
     <string name="out">BREATHE OUT</string>
     <string name="mood_prediction">Mood Prediction:</string>
+    <string name="choose_mood">Please choose a mood</string>
+    <string name="choose_mood2">Please choose a mood</string>
 
 
 </resources>
