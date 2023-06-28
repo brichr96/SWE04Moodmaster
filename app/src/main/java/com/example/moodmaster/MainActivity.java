@@ -11,7 +11,7 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.moodmaster.feelingScale_MoodShow.FeelingScale;
+import com.example.moodmaster.feelingScale_MoodShow.FeelingScaleActivity;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent intent = new Intent(MainActivity.this, FeelingScale.class);
+                Intent intent = new Intent(MainActivity.this, FeelingScaleActivity.class);
                 startActivity(intent);
             }
         }, 5000);

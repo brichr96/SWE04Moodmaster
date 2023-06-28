@@ -101,20 +101,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 
 import com.example.moodmaster.EmergencyCall;
 import com.example.moodmaster.R;
 import com.example.moodmaster.feelingScale_MoodShow.BreathingActivity;
-import com.example.moodmaster.feelingScale_MoodShow.FeelingScale;
-import com.example.moodmaster.feelingScale_MoodShow.MapsActivity;
-import com.example.moodmaster.feelingScale_MoodShow.moods_tabbed;
 
-public class LightTabFragment extends Fragment implements SensorEventListener {
+public class LightFragment extends Fragment implements SensorEventListener {
 
     private SensorManager sensorManager;
     private Sensor lightSensor;
@@ -130,7 +125,7 @@ public class LightTabFragment extends Fragment implements SensorEventListener {
 
 
 
-    public LightTabFragment() {
+    public LightFragment() {
         // Required empty public constructor
     }
 
@@ -147,7 +142,7 @@ public class LightTabFragment extends Fragment implements SensorEventListener {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.activity_light, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_light, container, false);
         displayLight = rootView.findViewById(R.id.lightValueTextView);
 
         ImageButton emergencyCall = rootView.findViewById(R.id.emergencyButton);

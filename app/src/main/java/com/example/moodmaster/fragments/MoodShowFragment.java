@@ -3,8 +3,6 @@ package com.example.moodmaster.fragments;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Color;
-import android.hardware.Sensor;
-import android.hardware.SensorManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -19,7 +17,6 @@ import com.example.moodmaster.DB.MoodDao;
 import com.example.moodmaster.DB.RoomDB;
 import com.example.moodmaster.EmergencyCall;
 import com.example.moodmaster.R;
-import com.example.moodmaster.feelingScale_MoodShow.FeelingScale;
 import com.example.moodmaster.mood_algo.Mood;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.AxisBase;
@@ -33,7 +30,7 @@ import com.github.mikephil.charting.formatter.ValueFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MoodTabbedFragment extends Fragment {
+public class MoodShowFragment extends Fragment {
     private LineChart chart;
     private MoodDao moodDao;
 
@@ -49,14 +46,14 @@ public class MoodTabbedFragment extends Fragment {
 
     private TextView valueText;
 
-    public MoodTabbedFragment() {
+    public MoodShowFragment() {
         // Required empty public constructor
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.mood_show, container, false);
+        View view = inflater.inflate(R.layout.fragment_mood_show, container, false);
 
         ImageButton emergencyCall = view.findViewById(R.id.emergencyButton);
 

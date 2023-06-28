@@ -3,8 +3,6 @@ package com.example.moodmaster.feelingScale_MoodShow;
 import android.content.Context;
 import android.content.Intent;
 import android.hardware.Sensor;
-import android.hardware.SensorEvent;
-import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -31,7 +29,7 @@ import java.util.List;
  * The user can swipe left or right on the mood image to change the selected mood.
  * Tapping on a mood image starts a new activity.
  */
-public class FeelingScale extends AppCompatActivity {
+public class FeelingScaleActivity extends AppCompatActivity {
     private MoodDao moodDao;
     private ImageView moodImageView;
     private int[] moods;
@@ -48,7 +46,7 @@ public class FeelingScale extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.feelingscale);
+        setContentView(R.layout.activity_feeling_scale);
 
         // Temp sensor test
         SensorManager sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
@@ -59,7 +57,7 @@ public class FeelingScale extends AppCompatActivity {
         emergencyCall.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                EmergencyCall.showEmergencyCallConfirmationDialog(FeelingScale.this);
+                EmergencyCall.showEmergencyCallConfirmationDialog(FeelingScaleActivity.this);
             }
         });
 
@@ -162,11 +160,11 @@ public class FeelingScale extends AppCompatActivity {
 //                        }
 
                         if(moods_check.isEmpty()){
-                            Toast.makeText(FeelingScale.this, R.string.choose_mood, Toast.LENGTH_SHORT).show();
+                            Toast.makeText(FeelingScaleActivity.this, R.string.choose_mood, Toast.LENGTH_SHORT).show();
 //                          recreate();
                         }
                         else{
-                            Intent intent = new Intent(FeelingScale.this, moods_tabbed.class);
+                            Intent intent = new Intent(FeelingScaleActivity.this, Tabs.class);
                             startActivity(intent);
                         }
                     }
@@ -272,7 +270,7 @@ public class FeelingScale extends AppCompatActivity {
      * @param mood The mood selected by the user.
      */
     private void startNewActivity(int mood) {
-        Intent intent = new Intent(FeelingScale.this, moods_tabbed.class);
+        Intent intent = new Intent(FeelingScaleActivity.this, Tabs.class);
         intent.putExtra("mood", mood);
         startActivity(intent);
     }

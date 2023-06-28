@@ -9,9 +9,9 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
 import com.example.moodmaster.R;
-import com.example.moodmaster.fragments.LightTabFragment;
+import com.example.moodmaster.fragments.LightFragment;
 import com.example.moodmaster.fragments.StepCounterFragment;
-import com.example.moodmaster.fragments.MoodTabbedFragment;
+import com.example.moodmaster.fragments.MoodShowFragment;
 
 /**
  * A [FragmentPagerAdapter] that returns a fragment corresponding to
@@ -32,11 +32,11 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
     public Fragment getItem(int position) {
         switch (position) {
             case 0:
-                return new MoodTabbedFragment();
+                return new MoodShowFragment();
             case 1:
                 return new StepCounterFragment();
             case 2:
-                return new LightTabFragment();
+                return new LightFragment();
             default:
                 return null;
         }

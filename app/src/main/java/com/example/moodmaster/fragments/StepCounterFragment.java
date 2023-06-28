@@ -18,7 +18,6 @@ import androidx.fragment.app.Fragment;
 
 import com.example.moodmaster.EmergencyCall;
 import com.example.moodmaster.R;
-import com.example.moodmaster.feelingScale_MoodShow.FeelingScale;
 import com.example.moodmaster.feelingScale_MoodShow.MapsActivity;
 import com.example.moodmaster.feelingScale_MoodShow.StepCountService;
 
@@ -46,7 +45,7 @@ public class StepCounterFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_moods_tabbed, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_step_counter, container, false);
 
         stepCountTextView = rootView.findViewById(R.id.step_count_text);
         progressBar = rootView.findViewById(R.id.your_progress_bar_id);

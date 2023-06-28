@@ -24,7 +24,7 @@
             android:name=".feelingScale_MoodShow.BreathingActivity"
             android:exported="false" />
         <activity
-            android:name=".feelingScale_MoodShow.moods_tabbed"
+            android:name=".feelingScale_MoodShow.Tabs"
             android:exported="false"
             android:label="@string/title_activity_moods_tabbed"
             android:theme="@style/Theme.Moodmaster.NoActionBar" />
@@ -32,7 +32,7 @@
             android:name=".feelingScale_MoodShow.MapsActivity"
             android:exported="false" />
         <activity
-            android:name=".feelingScale_MoodShow.FeelingScale"
+            android:name=".feelingScale_MoodShow.FeelingScaleActivity"
             android:exported="true" />
         <activity
             android:name=".MainActivity"
