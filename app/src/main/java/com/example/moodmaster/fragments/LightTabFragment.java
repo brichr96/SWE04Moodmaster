@@ -109,6 +109,7 @@ import androidx.fragment.app.Fragment;
 
 import com.example.moodmaster.EmergencyCall;
 import com.example.moodmaster.R;
+import com.example.moodmaster.feelingScale_MoodShow.BreathingActivity;
 import com.example.moodmaster.feelingScale_MoodShow.FeelingScale;
 import com.example.moodmaster.feelingScale_MoodShow.MapsActivity;
 import com.example.moodmaster.feelingScale_MoodShow.moods_tabbed;
@@ -147,7 +148,7 @@ public class LightTabFragment extends Fragment implements SensorEventListener {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.activity_light, container, false);
-        displayLight = rootView.findViewById(R.id.luxValueText);
+        displayLight = rootView.findViewById(R.id.lightValueTextView);
 
         ImageButton emergencyCall = rootView.findViewById(R.id.emergencyButton);
 
@@ -155,6 +156,16 @@ public class LightTabFragment extends Fragment implements SensorEventListener {
             @Override
             public void onClick(View view) {
                 EmergencyCall.showEmergencyCallConfirmationDialog(getActivity());
+            }
+        });
+
+        Button breathingButton = rootView.findViewById(R.id.startBreathingButton);
+
+        breathingButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getContext(), BreathingActivity.class);
+                startActivity(intent);
             }
         });
 
@@ -185,7 +196,20 @@ public class LightTabFragment extends Fragment implements SensorEventListener {
         getActivity().runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                displayLight.setText(String.valueOf(lux));
+
+                if(lux < 50){
+                    displayLight.setText("DARK");
+                }
+                else if(lux >= 50 && lux < 100){
+                    displayLight.setText("DIM");
+                }
+                else if(lux >= 100 && lux < 10000){
+                    displayLight.setText("BRIGHT");
+                }
+                else{
+                    displayLight.setText("SUNLIGHT");
+                }
+
             }
         });
     }
