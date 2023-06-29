@@ -30,5 +30,9 @@
     <string name="in">EINATMEN</string>
     <string name="mood_prediction">Stimmungsprognose</string>
     <string name="choose_mood">Bitte Stimmung auswählen</string>
-    <string name="choose_mood2">Bitte Stimmung auswählen</string>
+    <string name="enter_phone_number">Telefonnummer eingeben</string>
+    <string name="phone_number">Telefonnummer</string>
+    <string name="save">Speichern</string>
+    <string name="current_emergency_phone_number">Aktuelle Notfallsnummer</string>
+    <string name="choose_mood2">test</string>
 </resources>

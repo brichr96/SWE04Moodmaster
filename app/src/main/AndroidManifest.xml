@@ -21,6 +21,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Moodmaster">
         <activity
+            android:name=".SettingsActivity"
+            android:exported="false" />
+        <activity
             android:name=".feelingScale_MoodShow.BreathingActivity"
             android:exported="false" />
         <activity

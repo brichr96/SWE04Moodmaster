@@ -2,6 +2,7 @@ package com.example.moodmaster.feelingScale_MoodShow;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.hardware.Sensor;
 import android.hardware.SensorManager;
 import android.os.AsyncTask;
@@ -17,6 +18,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.moodmaster.EmergencyCall;
+import com.example.moodmaster.SettingsActivity;
 import com.example.moodmaster.mood_algo.Mood;
 import com.example.moodmaster.DB.MoodDao;
 import com.example.moodmaster.DB.RoomDB;
@@ -38,6 +40,8 @@ public class FeelingScaleActivity extends AppCompatActivity {
 
     private boolean moodSelected;
 
+    private SharedPreferences phoneNumber;
+
     /**
      * Performs initialization of the activity.
      *
@@ -53,13 +57,24 @@ public class FeelingScaleActivity extends AppCompatActivity {
         Sensor lightSensor = sensorManager.getDefaultSensor(Sensor.TYPE_LIGHT);
         Button btnNext  = findViewById(R.id.btnnext);
         ImageButton emergencyCall = findViewById(R.id.emergencyButton);
+        ImageButton settingsBtn = findViewById(R.id.settingsButton);
 
         emergencyCall.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                EmergencyCall.showEmergencyCallConfirmationDialog(FeelingScaleActivity.this);
+                EmergencyCall.showEmergencyCallConfirmationDialog(FeelingScaleActivity.this, getApplicationContext());
             }
         });
+
+        settingsBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(FeelingScaleActivity.this, SettingsActivity.class);
+                startActivity(intent);
+            }
+        });
+
+
 
         // Instantiate your DBHandler
         RoomDB roomDb = RoomDB.getInstance(getApplicationContext());

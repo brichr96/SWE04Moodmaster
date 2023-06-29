@@ -150,7 +150,7 @@ public class LightFragment extends Fragment implements SensorEventListener {
         emergencyCall.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                EmergencyCall.showEmergencyCallConfirmationDialog(getActivity());
+                EmergencyCall.showEmergencyCallConfirmationDialog(getActivity(), getActivity().getApplicationContext());
             }
         });
 

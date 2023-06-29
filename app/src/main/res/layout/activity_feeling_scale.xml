@@ -1,117 +1,129 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:background="@drawable/background_mountain">
+
+<com.google.android.flexbox.FlexboxLayout
+    android:id="@+id/flexboxLayout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@drawable/background_mountain"
-
-    tools:context=".MainActivity">
-
-
-    <com.google.android.flexbox.FlexboxLayout
-        android:id="@+id/flexboxLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:justifyContent="space_evenly"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/moodImageView"
-        app:layout_constraintVertical_bias="0.351"> <!-- or "space_between", "space_evenly" -->
-
-        <ImageButton
-            android:id="@+id/veryHappy"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:background="@drawable/ic_smiley_super_happy"
-            android:text="Button"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/happy" />
-
-        <ImageButton
-            android:id="@+id/happy"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:background="@drawable/ic_smiley_happy"
-            android:text="Button"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/medium" />
-
-        <ImageButton
-            android:id="@+id/medium"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:background="@drawable/ic_smiley_normal"
-            android:text="Button"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/disappointed" />
-
-
-        <ImageButton
-            android:id="@+id/disappointed"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:background="@drawable/ic_smiley_disappointed"
-            android:text="Button"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/sad" />
-
-        <ImageButton
-            android:id="@+id/sad"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:background="@drawable/ic_smiley_sad"
-            android:text="Button"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
-
-    </com.google.android.flexbox.FlexboxLayout>
-
-    <TextView
-        android:id="@+id/welcomeQ"
-        android:layout_width="217dp"
-        android:layout_height="53dp"
-        android:layout_marginTop="96dp"
-        android:gravity="center"
-        android:text="@string/how_are_you_feeling_today"
-        android:textAlignment="center"
-        android:textSize="24dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/btnnext"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:text="@string/next"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/flexboxLayout" />
-
-    <ImageView
-        android:id="@+id/moodImageView"
-        android:layout_width="215dp"
-        android:layout_height="146dp"
-        android:layout_marginTop="80dp"
-        android:src="@drawable/ic_smiley_normal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.494"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/welcomeQ" />
+    android:layout_height="wrap_content"
+    app:justifyContent="space_evenly"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintHorizontal_bias="0.0"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@+id/moodImageView"
+    app:layout_constraintVertical_bias="0.351"> <!-- or "space_between", "space_evenly" -->
 
     <ImageButton
-        android:id="@+id/emergencyButton"
-        android:layout_width="56dp"
-        android:layout_height="56dp"
-        android:layout_margin="16dp"
-        android:background="@drawable/emergency"
+        android:id="@+id/veryHappy"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:background="@drawable/ic_smiley_super_happy"
+        android:text="Button"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/happy" />
+
+    <ImageButton
+        android:id="@+id/happy"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:background="@drawable/ic_smiley_happy"
+        android:text="Button"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/medium" />
+
+    <ImageButton
+        android:id="@+id/medium"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:background="@drawable/ic_smiley_normal"
+        android:text="Button"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/disappointed" />
+
+
+    <ImageButton
+        android:id="@+id/disappointed"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:background="@drawable/ic_smiley_disappointed"
+        android:text="Button"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/sad" />
+
+    <ImageButton
+        android:id="@+id/sad"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:background="@drawable/ic_smiley_sad"
+        android:text="Button"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
+
+</com.google.android.flexbox.FlexboxLayout>
+
+<TextView
+    android:id="@+id/welcomeQ"
+    android:layout_width="217dp"
+    android:layout_height="53dp"
+    android:layout_marginTop="96dp"
+    android:gravity="center"
+    android:text="@string/how_are_you_feeling_today"
+    android:textAlignment="center"
+    android:textSize="24dp"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent" />
+
+<Button
+    android:id="@+id/btnnext"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="16dp"
+    android:text="@string/next"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintHorizontal_bias="0.498"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@+id/flexboxLayout" />
+
+<ImageView
+    android:id="@+id/moodImageView"
+    android:layout_width="215dp"
+    android:layout_height="146dp"
+    android:layout_marginTop="80dp"
+    android:src="@drawable/ic_smiley_normal"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintHorizontal_bias="0.494"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@+id/welcomeQ" />
+
+<ImageButton
+    android:id="@+id/emergencyButton"
+    android:layout_width="56dp"
+    android:layout_height="56dp"
+    android:layout_margin="16dp"
+    android:layout_marginBottom="28dp"
+    android:background="@drawable/emergency"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintHorizontal_bias="0.954"
+    app:layout_constraintStart_toStartOf="parent" />
+
+<ImageButton
+    android:id="@+id/settingsButton"
+    android:layout_width="56dp"
+    android:layout_height="56dp"
+    android:layout_margin="16dp"
+    android:background="@drawable/settings"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintVertical_bias="1.0" />
+
+    
 
 </androidx.constraintlayout.widget.ConstraintLayout>

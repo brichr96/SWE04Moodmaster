@@ -18,7 +18,7 @@ import com.example.moodmaster.R;
 
 public class BreathingActivity extends AppCompatActivity {
 
-    private static final long ANIMATION_DURATION = 4500; // Animation duration in milliseconds
+    private static final long ANIMATION_DURATION = 4000; // Animation duration in milliseconds
 
     private View blueCircle;
 

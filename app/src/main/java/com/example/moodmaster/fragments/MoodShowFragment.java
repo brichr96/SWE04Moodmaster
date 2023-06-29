@@ -60,7 +60,7 @@ public class MoodShowFragment extends Fragment {
         emergencyCall.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                EmergencyCall.showEmergencyCallConfirmationDialog(getActivity());
+                EmergencyCall.showEmergencyCallConfirmationDialog(getActivity(), getActivity().getApplicationContext());
             }
         });
 
