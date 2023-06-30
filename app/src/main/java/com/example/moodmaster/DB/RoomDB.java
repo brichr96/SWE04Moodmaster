@@ -13,6 +13,12 @@ public abstract class RoomDB extends RoomDatabase {
 
     public abstract MoodDao moodDao();
 
+    /**
+     * Returns the instance of the Room database.
+     *
+     * @param context The context used to access the application resources and services.
+     * @return The instance of the Room database.
+     */
     public static RoomDB getInstance(Context context){
         if(RoomDB.moodDBInstance == null){
             synchronized(RoomDB.class){

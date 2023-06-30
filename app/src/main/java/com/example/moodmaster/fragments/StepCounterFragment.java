@@ -84,6 +84,12 @@ public class StepCounterFragment extends Fragment {
         getActivity().unregisterReceiver(broadcastReceiver);
     }
 
+    /**
+     * Checks whether a service of the specified class is currently running.
+     *
+     * @param serviceClass The class of the service to check.
+     * @return {@code true} if a service of the specified class is running, {@code false} otherwise.
+     */
     private boolean isServiceRunning(Class<?> serviceClass) {
         ActivityManager manager = (ActivityManager) getContext().getSystemService(Context.ACTIVITY_SERVICE);
         for (ActivityManager.RunningServiceInfo service : manager.getRunningServices(Integer.MAX_VALUE)) {
@@ -94,6 +100,13 @@ public class StepCounterFragment extends Fragment {
         return false;
     }
 
+    /**
+     * BroadcastReceiver responsible for receiving and handling broadcast intents.
+     * It listens for two types of actions: ACTION_BOOT_COMPLETED and "com.example.moodmaster.STEPS_UPDATE".
+     * - When ACTION_BOOT_COMPLETED is received, it starts the StepCountService.
+     * - When "com.example.moodmaster.STEPS_UPDATE" is received, it retrieves the updated steps count from the intent
+     *   and updates the steps value. It then calls the loadSteps() method to update the UI with the new steps count.
+     */
     private BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
@@ -108,6 +121,11 @@ public class StepCounterFragment extends Fragment {
         }
     };
 
+    /**
+     * Loads and displays the steps count and progress.
+     * It updates the step count TextView with the current steps value
+     * and sets the progress of the progressBar based on the steps count.
+     */
     private void loadSteps() {
         if (stepCountTextView != null) {
             stepCountTextView.setText(String.valueOf(steps));

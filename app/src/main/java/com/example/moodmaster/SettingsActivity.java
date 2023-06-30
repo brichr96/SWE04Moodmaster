@@ -43,6 +43,11 @@ public class SettingsActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * Saves the provided emergency phone number in SharedPreferences.
+     *
+     * @param number The emergency phone number to be saved.
+     */
     private void saveNumber(String number){
         SharedPreferences.Editor editor = emergencyNumber.edit();
         editor.putString(KEY, number);

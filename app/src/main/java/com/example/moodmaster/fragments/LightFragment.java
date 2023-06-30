@@ -108,6 +108,11 @@ public class LightFragment extends Fragment implements SensorEventListener {
     public void onAccuracyChanged(Sensor sensor, int accuracy) {
     }
 
+    /**
+     * Saves the Lux value to the SharedPreferences.
+     *
+     * @param luxValue The Lux value to be saved.
+     */
     private void saveLux(float luxValue){
         SharedPreferences.Editor editor = algoValues.edit();
         editor.putFloat(KEY, luxValue);

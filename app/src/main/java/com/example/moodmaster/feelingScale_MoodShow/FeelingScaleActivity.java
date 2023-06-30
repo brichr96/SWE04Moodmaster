@@ -1,9 +1,6 @@
 package com.example.moodmaster.feelingScale_MoodShow;
 
-import android.content.Context;
 import android.content.Intent;
-import android.hardware.Sensor;
-import android.hardware.SensorManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.GestureDetector;
@@ -215,6 +212,11 @@ public class FeelingScaleActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Starts a new activity to display the selected mood.
+     *
+     * @param mood The mood value to be passed to the new activity.
+     */
     private void startNewActivity(int mood) {
         Intent intent = new Intent(FeelingScaleActivity.this, Tabs.class);
         intent.putExtra("mood", mood);

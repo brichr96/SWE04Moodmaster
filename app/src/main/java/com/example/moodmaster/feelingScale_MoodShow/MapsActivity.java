@@ -60,6 +60,12 @@ public class MapsActivity extends AppCompatActivity {
         stopLocationUpdates();
     }
 
+
+    /**
+     * Requests the ACCESS_FINE_LOCATION permission if it has not been granted already.
+     * If the permission is granted, it starts location updates.
+     * If the permission is not granted, it requests the permission from the user.
+     */
     private void requestLocationPermission() {
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED) {
@@ -71,6 +77,13 @@ public class MapsActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Starts receiving location updates using the fused location provider.
+     * It creates a LocationRequest with high accuracy and a 5-second interval for updates.
+     * If the necessary location permissions are not granted, the method returns early.
+     * Otherwise, it requests location updates from the fused location client using the
+     * created LocationRequest and the specified location callback.
+     */
     private void startLocationUpdates() {
         LocationRequest locationRequest = LocationRequest.create();
         locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
@@ -82,10 +95,18 @@ public class MapsActivity extends AppCompatActivity {
         fusedLocationClient.requestLocationUpdates(locationRequest, locationCallback, null);
     }
 
+    /**
+     * Stops receiving location updates by removing the location callback from the fused location client.
+     */
     private void stopLocationUpdates() {
         fusedLocationClient.removeLocationUpdates(locationCallback);
     }
 
+    /**
+     * Updates the UI based on the provided location information.
+     *
+     * @param location The location object containing latitude and longitude coordinates.
+     */
     private void updateLocationUI(Location location) {
         if (location != null) {
             double latitude = location.getLatitude();
@@ -108,6 +129,14 @@ public class MapsActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Opens Google Maps with directions from the starting location to the destination location.
+     *
+     * @param startLatitude  The latitude of the starting location.
+     * @param startLongitude The longitude of the starting location.
+     * @param endLatitude    The latitude of the destination location.
+     * @param endLongitude   The longitude of the destination location.
+     */
     public void openGoogleMaps(double startLatitude, double startLongitude, double endLatitude, double endLongitude) {
 
         String uri = "http://maps.google.com/maps?dir_mode=walking&saddr=" + startLatitude + "," + startLongitude + "&daddr=" + endLatitude + "," + endLongitude;
@@ -119,6 +148,12 @@ public class MapsActivity extends AppCompatActivity {
         startActivityForResult(intent, REQUEST_GOOGLE_MAPS);
     }
 
+    /**
+     * Calculates a new LatLng position by applying a random offset to the given starting LatLng position.
+     *
+     * @param startingLatLng The starting LatLng position.
+     * @return A new LatLng position with a random offset applied.
+     */
     public static LatLng getLatLngOffset(LatLng startingLatLng) {
         double radius = 6371;
         double distance = 1.0;

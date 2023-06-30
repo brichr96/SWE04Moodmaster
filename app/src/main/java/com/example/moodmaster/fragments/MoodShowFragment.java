@@ -68,6 +68,11 @@ public class MoodShowFragment extends Fragment {
         return view;
     }
 
+    /**
+     * Sets the background color of the mood circle based on the given value.
+     *
+     * @param value The value used to determine the background color.
+     */
     private void setColorCircleBackground(int value) {
         value = moodScore;
         colorStep = value / 10;
@@ -77,12 +82,22 @@ public class MoodShowFragment extends Fragment {
         colorCircle.setBackgroundColor(color);
     }
 
+    /**
+     * Updates the value text view in the mood circle with the given value.
+     *
+     * @param value The value to be displayed in the text view.
+     */
     private void updateValueText(int value) {
         String text = String.valueOf(value) + "%";
 
         valueText.setText(text);
     }
 
+    /**
+     * Generates a line chart to display the mood values over time.
+     *
+     * @param moods A list of Mood objects representing the mood values.
+     */
     private void generateLineChart(List<Mood> moods) {
         List<Entry> entries = new ArrayList<>();
         ArrayList<String> xLabels = new ArrayList<>();
@@ -147,6 +162,16 @@ public class MoodShowFragment extends Fragment {
         }
     }
 
+    /**
+     * Calculates the overall mood score based on the provided mood values, light value, and steps count.
+     * The mood values are averaged, normalized, and weighted along with the light value and steps count.
+     * The overall mood score is a weighted sum of the normalized and weighted values, rounded to the nearest integer.
+     *
+     * @param moodValues An array of integers representing the mood values.
+     * @param light The light value.
+     * @param steps The steps count.
+     * @return The overall mood score as an integer.
+     */
     public int calculateOverallMoodScore(int[] moodValues, float light, int steps) {
         float maxLightValue = 10000f;
         float maxStepsCount = 10000f;
@@ -183,6 +208,15 @@ public class MoodShowFragment extends Fragment {
         return roundedMoodScore;
     }
 
+    /**
+     * Retrieves the last seven mood values from the provided list of moods.
+     * If the list contains at least seven moods, it returns the mood values of the last seven moods.
+     * If the list contains fewer than seven moods, it returns the mood values of all available moods.
+     * If the list is empty, it returns null.
+     *
+     * @param moods The list of moods.
+     * @return An array of integers representing the last seven mood values, or null if the list is empty.
+     */
     public int[] getLastSevenMoodValues(List<Mood> moods) {
         int[] lastSevenMoodsValues;
 
@@ -194,10 +228,11 @@ public class MoodShowFragment extends Fragment {
             for (int i = 0; i < lastSevenMoods.size(); i++) {
                 lastSevenMoodsValues[i] = lastSevenMoods.get(i).getMood();
             }
-        } else {
+        }
+        else {
             if(moods.size() > 0) {
                 List<Mood> lastSevenMoods = moods.subList(0, moods.size());
-                lastSevenMoodsValues = new int[moods.size()]; // Initialize with default values of 0
+                lastSevenMoodsValues = new int[moods.size()];
                 for (int i = 0; i < lastSevenMoods.size(); i++) {
                     lastSevenMoodsValues[i] = lastSevenMoods.get(i).getMood();
                 }
@@ -211,10 +246,20 @@ public class MoodShowFragment extends Fragment {
         return lastSevenMoodsValues;
     }
 
+    /**
+     * Retrieves the lux value from the SharedPreferences.
+     *
+     * @return The lux value.
+     */
     private float getLux() {
         return algoValues.getFloat(KEY, 0);
     }
 
+    /**
+     * Retrieves the number of steps from the SharedPreferences.
+     *
+     * @return The number of steps.
+     */
     private int getSteps() {
         return algoValues.getInt(KEY2, 0);
     }

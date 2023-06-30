@@ -69,12 +69,22 @@ public class StepCountService extends Service implements SensorEventListener {
     public void onAccuracyChanged(Sensor sensor, int accuracy) {
     }
 
+    /**
+     * Saves the step count in the SharedPreferences.
+     *
+     * @param steps The step count to save.
+     */
     private void saveSteps(int steps) {
         SharedPreferences.Editor editor = algoValues.edit();
         editor.putInt(KEY, steps);
         editor.apply();
     }
 
+    /**
+     * Broadcasts the updated step count to registered receivers.
+     *
+     * @param steps The updated step count to broadcast.
+     */
     private void broadcastSteps(int steps) {
         Intent intent = new Intent();
         intent.setAction("com.example.moodmaster.STEPS_UPDATE");

@@ -41,6 +41,10 @@ public class BreathingActivity extends AppCompatActivity {
         animateCircle();
     }
 
+    /**
+     * Animates the circle by scaling it up and down sequentially and updating the breathing text.
+     * This method uses AnimatorSet, ObjectAnimator, and ValueAnimator to create the animation.
+     */
     private void animateCircle() {
         AnimatorSet animatorSet = new AnimatorSet();
 

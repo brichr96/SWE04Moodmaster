@@ -27,6 +27,7 @@ public class Tabs extends AppCompatActivity {
         viewPager.setAdapter(sectionsPagerAdapter);
         TabLayout tabs = findViewById(R.id.tabs);
         tabs.setupWithViewPager(viewPager);
-    }}
+    }
+}
 
 

@@ -1,6 +1,5 @@
 package com.example.moodmaster;
 
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -32,12 +31,17 @@ public class MainActivity extends AppCompatActivity {
         }, 5000);
     }
 
-    private void setAnimation(TextView textview){
+    /**
+     * Sets a scale animation on the specified TextView.
+     *
+     * @param textView The TextView to apply the animation to.
+     */
+    private void setAnimation(TextView textView){
         Animation scaleAnimation = new ScaleAnimation(0.7f, 1.0f, 0.7f, 1.0f,
                 Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
         scaleAnimation.setDuration(3000);
         scaleAnimation.setInterpolator(new AccelerateDecelerateInterpolator());
-        textview.startAnimation(scaleAnimation);
+        textView.startAnimation(scaleAnimation);
     }
 }
 
