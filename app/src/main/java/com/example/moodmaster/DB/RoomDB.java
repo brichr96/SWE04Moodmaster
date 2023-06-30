@@ -1,17 +1,12 @@
 package com.example.moodmaster.DB;
 
 import android.content.Context;
-
 import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
-import androidx.room.TypeConverters;
-
-import com.example.moodmaster.Converters;
 import com.example.moodmaster.mood_algo.Mood;
 
 @Database(entities = {Mood.class}, version = 1)
-@TypeConverters({Converters.class})
 public abstract class RoomDB extends RoomDatabase {
 
     private static RoomDB moodDBInstance;

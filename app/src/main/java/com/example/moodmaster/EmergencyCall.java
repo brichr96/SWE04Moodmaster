@@ -1,31 +1,18 @@
 package com.example.moodmaster;
 
-import static java.security.AccessController.getContext;
-
 import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
-
 import androidx.appcompat.app.AlertDialog;
 
 public class EmergencyCall {
 
-//    private static String phoneNumber = "06502729621";
-
-//    private static String phoneNumber = "0676840004555";
-
-//    private static String phoneNumber = "06649174774";
-
     private static String phoneNumber = "06766280010";
     private static SharedPreferences emergencyNumber;
-
     private static final String KEY = "number";
-
-
-
 
     public static void showEmergencyCallConfirmationDialog(Activity activity, Context context) {
         AlertDialog.Builder builder = new AlertDialog.Builder(activity);
@@ -34,7 +21,6 @@ public class EmergencyCall {
         builder.setPositiveButton(R.string.call, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                // Call the emergency contact
                 makeCall(activity, context);
             }
         });

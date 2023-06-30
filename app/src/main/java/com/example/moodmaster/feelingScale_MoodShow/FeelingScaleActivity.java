@@ -2,7 +2,6 @@ package com.example.moodmaster.feelingScale_MoodShow;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.hardware.Sensor;
 import android.hardware.SensorManager;
 import android.os.AsyncTask;
@@ -14,47 +13,28 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
-
 import androidx.appcompat.app.AppCompatActivity;
-
 import com.example.moodmaster.EmergencyCall;
 import com.example.moodmaster.SettingsActivity;
 import com.example.moodmaster.mood_algo.Mood;
 import com.example.moodmaster.DB.MoodDao;
 import com.example.moodmaster.DB.RoomDB;
 import com.example.moodmaster.R;
-
 import java.util.List;
 
-/**
- * This activity displays a feeling scale and allows the user to select their current mood.
- * The user can swipe left or right on the mood image to change the selected mood.
- * Tapping on a mood image starts a new activity.
- */
 public class FeelingScaleActivity extends AppCompatActivity {
     private MoodDao moodDao;
     private ImageView moodImageView;
     private int[] moods;
     private int currentMood;
     private GestureDetector gestureDetector;
-
     private boolean moodSelected;
 
-    private SharedPreferences phoneNumber;
-
-    /**
-     * Performs initialization of the activity.
-     *
-     * @param savedInstanceState The saved instance state Bundle.
-     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_feeling_scale);
 
-        // Temp sensor test
-        SensorManager sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
-        Sensor lightSensor = sensorManager.getDefaultSensor(Sensor.TYPE_LIGHT);
         Button btnNext  = findViewById(R.id.btnnext);
         ImageButton emergencyCall = findViewById(R.id.emergencyButton);
         ImageButton settingsBtn = findViewById(R.id.settingsButton);
@@ -74,9 +54,6 @@ public class FeelingScaleActivity extends AppCompatActivity {
             }
         });
 
-
-
-        // Instantiate your DBHandler
         RoomDB roomDb = RoomDB.getInstance(getApplicationContext());
         moodDao = roomDb.moodDao();
 
@@ -88,17 +65,14 @@ public class FeelingScaleActivity extends AppCompatActivity {
         ImageButton mButtonD = findViewById(R.id.disappointed);
         ImageButton mButtonS = findViewById(R.id.sad);
 
-
-
-
         mButtonVH.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (!moodSelected) { // Check if a mood has already been selected
+                if (!moodSelected) {
                     Mood newMood = new Mood(5);
                     new InsertMoodAsyncTask().execute(newMood);
                     startNewActivity(5);
-                    moodSelected = true; // Set the flag to true after selecting a mood
+                    moodSelected = true;
                 }
             }
         });
@@ -106,11 +80,11 @@ public class FeelingScaleActivity extends AppCompatActivity {
         mButtonH.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (!moodSelected) { // Check if a mood has already been selected
+                if (!moodSelected) {
                     Mood newMood = new Mood(4);
                     new InsertMoodAsyncTask().execute(newMood);
                     startNewActivity(4);
-                    moodSelected = true; // Set the flag to true after selecting a mood
+                    moodSelected = true;
                 }
             }
         });
@@ -118,11 +92,11 @@ public class FeelingScaleActivity extends AppCompatActivity {
         mButtonM.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (!moodSelected) { // Check if a mood has already been selected
+                if (!moodSelected) {
                     Mood newMood = new Mood(3);
                     new InsertMoodAsyncTask().execute(newMood);
                     startNewActivity(3);
-                    moodSelected = true; // Set the flag to true after selecting a mood
+                    moodSelected = true;
                 }
             }
         });
@@ -130,11 +104,11 @@ public class FeelingScaleActivity extends AppCompatActivity {
         mButtonD.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (!moodSelected) { // Check if a mood has already been selected
+                if (!moodSelected) {
                     Mood newMood = new Mood(2);
                     new InsertMoodAsyncTask().execute(newMood);
                     startNewActivity(2);
-                    moodSelected = true; // Set the flag to true after selecting a mood
+                    moodSelected = true;
                 }
             }
         });
@@ -142,41 +116,23 @@ public class FeelingScaleActivity extends AppCompatActivity {
         mButtonS.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (!moodSelected) { // Check if a mood has already been selected
+                if (!moodSelected) {
                     Mood newMood = new Mood(1);
                     new InsertMoodAsyncTask().execute(newMood);
                     startNewActivity(1);
-                    moodSelected = true; // Set the flag to true after selecting a mood
+                    moodSelected = true;
                 }
             }
-
         });
 
         btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                /////////////////////
-                //check if no moods -> dialog, alert, toast
-                //not possible
-
                 new GetAllMoodsAsyncTask(){
-
                     @Override
                     protected void onPostExecute(List<Mood> moods_check){
-//                        for(Mood mood : moods_check){
-//                            System.out.println(moods_check.size() + "mood " + mood.getMood());
-//                        }
-//
-//                        Mood first = moods_check.get(0);
-//
-//                        while(first.getMood() == 5){
-//                            Toast.makeText(FeelingScale.this, "CHOOSE", Toast.LENGTH_SHORT).show();
-//                            recreate();
-//                        }
-
                         if(moods_check.isEmpty()){
                             Toast.makeText(FeelingScaleActivity.this, R.string.choose_mood, Toast.LENGTH_SHORT).show();
-//                          recreate();
                         }
                         else{
                             Intent intent = new Intent(FeelingScaleActivity.this, Tabs.class);
@@ -184,18 +140,9 @@ public class FeelingScaleActivity extends AppCompatActivity {
                         }
                     }
                 }.execute();
-
-
-//                List<Mood> moods_check = moodDao.getAllMoods();
-//                for(Mood mood : moods_check){
-//                    System.out.println(moods_check.size() + "mood " + mood.getMood());
-//                }
-
-
             }
         });
 
-        // List of moods (replace with your actual drawable resources)
         moods = new int[]{
                 R.drawable.ic_smiley_super_happy,
                 R.drawable.ic_smiley_happy,
@@ -204,20 +151,16 @@ public class FeelingScaleActivity extends AppCompatActivity {
                 R.drawable.ic_smiley_disappointed
         };
 
-        currentMood = 0; // Start with the first mood
+        currentMood = 0;
         moodImageView.setImageResource(moods[currentMood]);
 
-        // Create a gesture detector
         gestureDetector = new GestureDetector(this, new GestureDetector.SimpleOnGestureListener() {
             @Override
             public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
-                // Detect horizontal swipes
                 if (Math.abs(e1.getX() - e2.getX()) > Math.abs(e1.getY() - e2.getY())) {
-                    // Swipe to the right (next mood)
                     if (e2.getX() > e1.getX()) {
                         currentMood = (currentMood + 1) % moods.length;
                     }
-                    // Swipe to the left (previous mood)
                     else {
                         currentMood = (currentMood - 1 + moods.length) % moods.length;
                     }
@@ -248,23 +191,19 @@ public class FeelingScaleActivity extends AppCompatActivity {
                         float deltaX = endX - startX;
                         float deltaY = endY - startY;
 
-                        // Check if the motion was a swipe (not a tap)
                         if (Math.abs(deltaX) > Math.abs(deltaY)) {
-                            // Swipe to the right
                             if (deltaX > 0) {
                                 currentMood = (currentMood + 1) % moods.length;
                             }
-                            // Swipe to the left
                             else {
                                 currentMood = (currentMood - 1 + moods.length) % moods.length;
                             }
 
                             moodImageView.setImageResource(moods[currentMood]);
                         } else {
-                            // Perform the action when the image view is touched
-                            if (!moodSelected) { // Check if a mood has already been selected
+                            if (!moodSelected) {
                                 startNewActivity(currentMood + 1);
-                                moodSelected = true; // Set the flag to true after selecting a mood
+                                moodSelected = true;
                             }
                         }
 
@@ -276,23 +215,12 @@ public class FeelingScaleActivity extends AppCompatActivity {
         });
     }
 
-
-
-
-    /**
-     * Starts a new activity based on the selected mood.
-     *
-     * @param mood The mood selected by the user.
-     */
     private void startNewActivity(int mood) {
         Intent intent = new Intent(FeelingScaleActivity.this, Tabs.class);
         intent.putExtra("mood", mood);
         startActivity(intent);
     }
 
-    /**
-     * Inserts a new mood into the database asynchronously.
-     */
     private class InsertMoodAsyncTask extends AsyncTask<Mood, Void, Void> {
         @Override
         protected Void doInBackground(Mood... moods) {

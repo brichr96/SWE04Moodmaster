@@ -38,4 +38,5 @@
         android:text="@string/loading_your_feelings"
         android:textColor="#8FBC8F"
         android:textSize="13sp" />
+
 </RelativeLayout>

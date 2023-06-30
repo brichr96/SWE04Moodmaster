@@ -10,9 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
-
 import androidx.fragment.app.Fragment;
-
 import com.example.moodmaster.DB.MoodDao;
 import com.example.moodmaster.DB.RoomDB;
 import com.example.moodmaster.EmergencyCall;
@@ -26,33 +24,25 @@ import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.formatter.ValueFormatter;
-
 import java.util.ArrayList;
 import java.util.List;
 
 public class MoodShowFragment extends Fragment {
     private LineChart chart;
     private MoodDao moodDao;
-
     private SharedPreferences algoValues;
-
     private final String KEY = "luxValue";
     private final String KEY2 = "steps";
-
     private int moodScore;
-
     private View colorCircle;
     private int colorStep;
-
     private TextView valueText;
 
     public MoodShowFragment() {
-        // Required empty public constructor
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_mood_show, container, false);
 
         ImageButton emergencyCall = view.findViewById(R.id.emergencyButton);
@@ -73,30 +63,21 @@ public class MoodShowFragment extends Fragment {
 
         valueText = view.findViewById(R.id.valueText);
 
-        // Calculate color step based on the value (1 to 100)
-
-
-        // Set the background color of the circle based on the color step
-
         new GetAllMoodsAsyncTask().execute();
-
-
 
         return view;
     }
 
     private void setColorCircleBackground(int value) {
-        // Calculate the color based on the color step
-        value = moodScore; // Replace with your value
+        value = moodScore;
         colorStep = value / 10;
+
         int color = Color.rgb(255 - (colorStep * 25), colorStep * 25, 0);
 
-        // Set the background color of the circle
         colorCircle.setBackgroundColor(color);
     }
 
     private void updateValueText(int value) {
-        // Update the text of the value textview
         String text = String.valueOf(value) + "%";
 
         valueText.setText(text);
@@ -167,14 +148,12 @@ public class MoodShowFragment extends Fragment {
     }
 
     public int calculateOverallMoodScore(int[] moodValues, float light, int steps) {
-        // Define weightage
         float maxLightValue = 10000f;
         float maxStepsCount = 10000f;
         float moodWeightage = 0.8f;
         float lightWeightage = 0.1f;
         float stepsWeightage = 0.1f;
 
-        // Calculate average mood value
         float sumMood = 0;
         for (int i = 0; i < moodValues.length; i++) {
             sumMood += moodValues[i];
@@ -183,11 +162,9 @@ public class MoodShowFragment extends Fragment {
         float averageMood = sumMood / moodValues.length;
         System.out.println("avg mood " + averageMood);
 
-        // Normalize average mood value
         float normalizedMood = (averageMood - 1) / 4;
         System.out.println("norm mood " + normalizedMood);
 
-        // Normalize other inputs
         float normalizedLight = light / maxLightValue;
         System.out.println("light " + light);
         System.out.println("norm light " + normalizedLight);
@@ -195,15 +172,12 @@ public class MoodShowFragment extends Fragment {
         System.out.println("steps " + steps);
         System.out.println("norm steps " + normalizedSteps);
 
-        // Calculate weighted sum
         float weightedMood = normalizedMood * moodWeightage;
         float weightedLight = normalizedLight * lightWeightage;
         float weightedSteps = normalizedSteps * stepsWeightage;
 
-        // Calculate overall mood score
         float overallMoodScore = (weightedMood + weightedLight + weightedSteps) * 100;
 
-        // Round the overall mood score
         int roundedMoodScore = Math.round(overallMoodScore);
 
         return roundedMoodScore;
@@ -212,15 +186,11 @@ public class MoodShowFragment extends Fragment {
     public int[] getLastSevenMoodValues(List<Mood> moods) {
         int[] lastSevenMoodsValues;
 
-        // Ensure that the moodList has at least 7 entries
         if (moods.size() >= 7) {
-            // Get the sublist containing the last 7 entries
             List<Mood> lastSevenMoods = moods.subList(moods.size() - 7, moods.size());
 
-            // Create a new int array with size 7
             lastSevenMoodsValues = new int[7];
 
-            // Copy the elements from the sublist to the int array
             for (int i = 0; i < lastSevenMoods.size(); i++) {
                 lastSevenMoodsValues[i] = lastSevenMoods.get(i).getMood();
             }
@@ -261,12 +231,9 @@ public class MoodShowFragment extends Fragment {
             algoValues = getContext().getSharedPreferences("algo", Context.MODE_PRIVATE);
             generateLineChart(moods);
             getLastSevenMoodValues(moods);
-//            updateValueText(moodScore);
-//            setColorCircleBackground();
             moodScore = calculateOverallMoodScore(getLastSevenMoodValues(moods), getLux(), getSteps());
             updateValueText(moodScore);
             setColorCircleBackground(moodScore);
-            System.out.println("MOOD SCORE----------" + moodScore);
         }
     }
 }

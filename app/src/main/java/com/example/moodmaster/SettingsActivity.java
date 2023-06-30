@@ -10,13 +10,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-
 import com.example.moodmaster.feelingScale_MoodShow.FeelingScaleActivity;
 
 public class SettingsActivity extends AppCompatActivity {
 
     private SharedPreferences emergencyNumber;
-
     private final String KEY = "number";
 
     @Override
@@ -25,7 +23,6 @@ public class SettingsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_settings);
 
         TextView currentNr = findViewById(R.id.currentPhoneNumber);
-
 
         emergencyNumber = getSharedPreferences("tel", Context.MODE_PRIVATE);
         String nr = emergencyNumber.getString(KEY, "");
@@ -49,7 +46,6 @@ public class SettingsActivity extends AppCompatActivity {
     private void saveNumber(String number){
         SharedPreferences.Editor editor = emergencyNumber.edit();
         editor.putString(KEY, number);
-        System.out.println("NR------------------" + number);
         editor.apply();
     }
 }

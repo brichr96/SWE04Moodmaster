@@ -14,16 +14,12 @@ public class StepCountService extends Service implements SensorEventListener {
 
     private SensorManager sensorManager;
     private Sensor accelerometer;
-
     private float accel;
     private float accelCurrent;
     private float accelLast;
-
     private int steps;
-
     private long lastStepTime;
     private long stepDelay = 500;
-
     private SharedPreferences algoValues;
     private final String KEY = "steps";
 
@@ -65,13 +61,12 @@ public class StepCountService extends Service implements SensorEventListener {
             steps++;
             lastStepTime = currentTime;
             saveSteps(steps);
-            broadcastSteps(steps); // Broadcasting the steps count
+            broadcastSteps(steps);
         }
     }
 
     @Override
     public void onAccuracyChanged(Sensor sensor, int accuracy) {
-        // We don't need this in the current context.
     }
 
     private void saveSteps(int steps) {

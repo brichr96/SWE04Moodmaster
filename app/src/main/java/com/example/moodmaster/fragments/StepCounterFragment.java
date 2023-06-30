@@ -13,9 +13,7 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-
 import androidx.fragment.app.Fragment;
-
 import com.example.moodmaster.EmergencyCall;
 import com.example.moodmaster.R;
 import com.example.moodmaster.feelingScale_MoodShow.MapsActivity;
@@ -26,11 +24,11 @@ public class StepCounterFragment extends Fragment {
     private TextView stepCountTextView;
     private ProgressBar progressBar;
     private int steps;
+
     private final String KEY = "steps";
     private static final int STEP_GOAL = 10000;
 
     public StepCounterFragment() {
-        // Required empty public constructor
     }
 
     @Override
@@ -99,13 +97,11 @@ public class StepCounterFragment extends Fragment {
     private BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-            // Receiving the broadcast when the device finishes rebooting
             if (intent.getAction().equals(Intent.ACTION_BOOT_COMPLETED)) {
-                // Start the StepCountService again after reboot
                 Intent serviceIntent = new Intent(context, StepCountService.class);
                 context.startService(serviceIntent);
-            } else if (intent.getAction().equals("com.example.moodmaster.STEPS_UPDATE")) {
-                // Update steps count when broadcast received
+            }
+            else if (intent.getAction().equals("com.example.moodmaster.STEPS_UPDATE")) {
                 steps = intent.getIntExtra("steps", 0);
                 loadSteps();
             }

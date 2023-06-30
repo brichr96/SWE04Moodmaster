@@ -1,22 +1,14 @@
 package com.example.moodmaster.mood_algo;
 
-
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
-import androidx.room.TypeConverters;
-
-import com.example.moodmaster.Converters;
-
-import java.util.Date;
 
 @Entity(tableName = "moods")
-@TypeConverters({Converters.class})
 public class Mood {
     @PrimaryKey(autoGenerate = true)
     private int moodID;
 
     private int mood;
-   // public Date date;
 
     public int getMoodID() {
         return moodID;
@@ -33,8 +25,6 @@ public class Mood {
     public void setMood(int mood) {
         this.mood = mood;
     }
-
-
 
     public Mood(int mood){
         this.mood = mood;

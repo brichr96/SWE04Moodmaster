@@ -8,9 +8,7 @@ import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.Animation;
 import android.view.animation.ScaleAnimation;
 import android.widget.TextView;
-
 import androidx.appcompat.app.AppCompatActivity;
-
 import com.example.moodmaster.feelingScale_MoodShow.FeelingScaleActivity;
 
 public class MainActivity extends AppCompatActivity {
@@ -40,8 +38,6 @@ public class MainActivity extends AppCompatActivity {
         scaleAnimation.setDuration(3000);
         scaleAnimation.setInterpolator(new AccelerateDecelerateInterpolator());
         textview.startAnimation(scaleAnimation);
-
     }
-
 }
 

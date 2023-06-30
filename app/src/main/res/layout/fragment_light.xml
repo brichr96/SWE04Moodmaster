@@ -5,7 +5,6 @@
     android:background="@drawable/background_fragment"
     android:layout_height="match_parent">
 
-
     <Button
         android:id="@+id/startBreathingButton"
         android:layout_width="wrap_content"
@@ -49,6 +48,5 @@
         android:background="@drawable/emergency"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>
