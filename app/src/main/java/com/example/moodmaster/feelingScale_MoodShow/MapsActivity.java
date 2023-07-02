@@ -149,7 +149,7 @@ public class MapsActivity extends AppCompatActivity {
     }
 
     /**
-     * Opens Google Maps with directions from the starting location to the destination location.
+     * Opens Google Maps with directions from the starting location to the destination location in walking mode.
      *
      * @param startLatitude  The latitude of the starting location.
      * @param startLongitude The longitude of the starting location.

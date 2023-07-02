@@ -116,7 +116,7 @@ public class MoodShowFragment extends Fragment {
 
         LineDataSet dataSet = new LineDataSet(entries, getString(R.string.mood_over_time));
         dataSet.setDrawCircles(false);
-        dataSet.setColor(Color.GREEN);
+        dataSet.setColor(Color.RED);
         dataSet.setDrawValues(false);
 
         LineData lineData = new LineData(dataSet);
@@ -188,20 +188,13 @@ public class MoodShowFragment extends Fragment {
         float sumMood = 0;
         for (int i = 0; i < moodValues.length; i++) {
             sumMood += moodValues[i];
-            System.out.println("mood " + moodValues[i]);
         }
         float averageMood = sumMood / moodValues.length;
-        System.out.println("avg mood " + averageMood);
 
         float normalizedMood = (averageMood - 1) / 4;
-        System.out.println("norm mood " + normalizedMood);
 
         float normalizedLight = light / maxLightValue;
-        System.out.println("light " + light);
-        System.out.println("norm light " + normalizedLight);
         float normalizedSteps = (float) steps / maxStepsCount;
-        System.out.println("steps " + steps);
-        System.out.println("norm steps " + normalizedSteps);
 
         float weightedMood = normalizedMood * moodWeightage;
         float weightedLight = normalizedLight * lightWeightage;
