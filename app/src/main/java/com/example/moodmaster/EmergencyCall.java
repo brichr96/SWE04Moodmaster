@@ -8,6 +8,11 @@ import android.content.SharedPreferences;
 import android.net.Uri;
 import androidx.appcompat.app.AlertDialog;
 
+/**
+ * This class provides utility methods for making emergency calls.
+ * It includes methods for displaying a confirmation dialog for making an emergency call
+ * and for initiating a phone call to the emergency number.
+ */
 public class EmergencyCall {
 
     private static String phoneNumber = "06766280010";

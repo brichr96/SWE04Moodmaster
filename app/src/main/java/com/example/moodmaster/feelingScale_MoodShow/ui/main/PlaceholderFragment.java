@@ -15,7 +15,8 @@ import androidx.lifecycle.ViewModelProvider;
 import com.example.moodmaster.databinding.FragmentStepCounterBinding;
 
 /**
- * A placeholder fragment containing a simple view.
+ * PlaceholderFragment is a class that extends Fragment,
+ * serving as a host for the View and manages lifecycle of the corresponding PageViewModel.
  */
 public class PlaceholderFragment extends Fragment {
 
@@ -24,6 +25,13 @@ public class PlaceholderFragment extends Fragment {
     private PageViewModel pageViewModel;
     private FragmentStepCounterBinding binding;
 
+    /**
+     * Factory method to create a new instance of
+     * this fragment using the provided parameters.
+     *
+     * @param index The section number this fragment represents.
+     * @return A new instance of PlaceholderFragment.
+     */
     public static PlaceholderFragment newInstance(int index) {
         PlaceholderFragment fragment = new PlaceholderFragment();
         Bundle bundle = new Bundle();
@@ -43,6 +51,16 @@ public class PlaceholderFragment extends Fragment {
         pageViewModel.setIndex(index);
     }
 
+    /**
+     * The system calls this when it's time for the fragment to draw its UI for the first time.
+     * To draw a UI for the fragment, a View component must be returned from this method which is the root of the fragment's layout.
+     * It can return null if the fragment does not provide a UI.
+     *
+     * @param inflater The LayoutInflater object that can be used to inflate any views in the fragment.
+     * @param container This is the parent view that the fragment's UI is attached to.
+     * @param savedInstanceState This fragment is being re-constructed from a previous saved state as given here.
+     * @return Return the View for the fragment's UI, or null.
+     */
     @Override
     public View onCreateView(
             @NonNull LayoutInflater inflater, ViewGroup container,
@@ -59,11 +77,5 @@ public class PlaceholderFragment extends Fragment {
             }
         });
         return root;
-    }
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        binding = null;
     }
 }

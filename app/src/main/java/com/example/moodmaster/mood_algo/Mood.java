@@ -3,6 +3,11 @@ package com.example.moodmaster.mood_algo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+/**
+ * This class represents a Mood entity in the Room database.
+ * Each Mood object corresponds to a row in the "moods" table.
+ */
+
 @Entity(tableName = "moods")
 public class Mood {
     @PrimaryKey(autoGenerate = true)

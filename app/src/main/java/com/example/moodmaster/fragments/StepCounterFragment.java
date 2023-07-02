@@ -19,6 +19,14 @@ import com.example.moodmaster.R;
 import com.example.moodmaster.feelingScale_MoodShow.MapsActivity;
 import com.example.moodmaster.feelingScale_MoodShow.StepCountService;
 
+/**
+ * This is a Fragment class that manages and displays a step counter for the user.
+ * The number of steps is updated in real time, and the UI is updated accordingly.
+ * The fragment has two key components:
+ * 1. A TextView to display the step count
+ * 2. A ProgressBar to visualize the user's progress towards a step goal
+ */
+
 public class StepCounterFragment extends Fragment {
 
     private TextView stepCountTextView;

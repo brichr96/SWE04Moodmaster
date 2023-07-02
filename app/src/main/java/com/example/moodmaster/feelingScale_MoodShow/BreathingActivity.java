@@ -14,6 +14,10 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import com.example.moodmaster.R;
 
+/**
+ * The `BreathingActivity` class represents an activity that displays a breathing animation
+ * with a scaling circle and changing breathing text.
+ */
 public class BreathingActivity extends AppCompatActivity {
 
     private static final long ANIMATION_DURATION = 4000;
@@ -21,17 +25,22 @@ public class BreathingActivity extends AppCompatActivity {
     private final String breatheIn = "BREATHE IN";
     private final String breatheOut = "BREATHE OUT";
 
+    /**
+     * Called when the activity is created. Sets up the layout, initializes views,
+     * and starts the animation.
+     *
+     * @param savedInstanceState The saved instance state Bundle.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_breathing);
 
         Button stopButton = findViewById(R.id.stopButton);
-
         stopButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent( BreathingActivity.this, Tabs.class);
+                Intent intent = new Intent(BreathingActivity.this, Tabs.class);
                 startActivity(intent);
             }
         });
@@ -47,7 +56,6 @@ public class BreathingActivity extends AppCompatActivity {
      */
     private void animateCircle() {
         AnimatorSet animatorSet = new AnimatorSet();
-
         TextView breathingTV = findViewById(R.id.tv_breathing);
 
         ObjectAnimator growAnimator = ObjectAnimator.ofPropertyValuesHolder(
@@ -56,7 +64,7 @@ public class BreathingActivity extends AppCompatActivity {
                 PropertyValuesHolder.ofFloat("scaleY", 1f, 3f)
         );
 
-        growAnimator.setRepeatMode(ValueAnimator.REVERSE); // Reverse the animation
+        growAnimator.setRepeatMode(ValueAnimator.REVERSE);
         growAnimator.setDuration(ANIMATION_DURATION);
 
         ObjectAnimator shrinkAnimator = ObjectAnimator.ofPropertyValuesHolder(
@@ -65,7 +73,7 @@ public class BreathingActivity extends AppCompatActivity {
                 PropertyValuesHolder.ofFloat("scaleY", 3f, 1f)
         );
 
-        shrinkAnimator.setRepeatMode(ValueAnimator.REVERSE); // Reverse the animation
+        shrinkAnimator.setRepeatMode(ValueAnimator.REVERSE);
         shrinkAnimator.setDuration(ANIMATION_DURATION);
 
         animatorSet.playSequentially(growAnimator, shrinkAnimator);
@@ -110,3 +118,4 @@ public class BreathingActivity extends AppCompatActivity {
         synchronizedAnimatorSet.start();
     }
 }
+

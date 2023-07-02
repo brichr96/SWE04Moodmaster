@@ -19,6 +19,15 @@ import com.example.moodmaster.EmergencyCall;
 import com.example.moodmaster.R;
 import com.example.moodmaster.feelingScale_MoodShow.BreathingActivity;
 
+
+/**
+ * This fragment uses the device's light sensor to measure the amount of light (in lux),
+ * and provides UI to display the light level.
+ * It also includes an "Emergency" button for emergency calls, and a "Breathing Exercise" button
+ * to start a breathing exercise activity.
+ * The measured light level is saved in SharedPreferences.
+ * to receive updates from the light sensor.
+ */
 public class LightFragment extends Fragment implements SensorEventListener {
 
     private SensorManager sensorManager;

@@ -21,6 +21,25 @@ import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.model.LatLng;
 import java.util.Random;
 
+
+/**
+ * MapsActivity is an AppCompatActivity that requests and manages user location updates and
+ * utilizes Google Maps to navigate from current location to a destination with a random offset.
+ *
+ * The activity checks for location permission and requests it if not already granted.
+ * If permission is granted, it starts to receive location updates using Android's fused
+ * location provider with a LocationCallback, which updates the UI each time the location is received.
+ *
+ * The activity also handles activity lifecycle methods such as onCreate, onResume, onPause,
+ * and onRequestPermissionsResult to ensure appropriate handling of location updates and permission requests.
+ *
+ * If the location is obtained successfully, the activity calculates an offset destination and opens Google Maps
+ * with walking directions from the current location to the destination.
+ *
+ * This class also overrides onActivityResult to handle the result of the Google Maps activity,
+ * and onRequestPermissionsResult to handle the result of the location permission request.
+ */
+
 public class MapsActivity extends AppCompatActivity {
 
     private static final int PERMISSIONS_REQUEST_LOCATION = 1;

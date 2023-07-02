@@ -10,6 +10,21 @@ import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.IBinder;
 
+
+/**
+ * StepCountService is a Service that uses an accelerometer sensor to count the user's steps.
+ * It implements SensorEventListener to receive updates from the accelerometer sensor.
+ *
+ * The service registers itself as a listener to the accelerometer sensor upon creation and unregisters when it's destroyed.
+ *
+ * It calculates the acceleration of the device based on sensor values, and determines whether a step has been taken
+ * based on changes in acceleration. When a step is detected, the service increments the step count, saves the new count
+ * in shared preferences, and broadcasts the new count to any registered receivers.
+ *
+ * The service also implements the onAccuracyChanged callback from SensorEventListener, but it doesn't take any action
+ * in this method.
+ */
+
 public class StepCountService extends Service implements SensorEventListener {
 
     private SensorManager sensorManager;
@@ -69,11 +84,6 @@ public class StepCountService extends Service implements SensorEventListener {
     public void onAccuracyChanged(Sensor sensor, int accuracy) {
     }
 
-    /**
-     * Saves the step count in the SharedPreferences.
-     *
-     * @param steps The step count to save.
-     */
     private void saveSteps(int steps) {
         SharedPreferences.Editor editor = algoValues.edit();
         editor.putInt(KEY, steps);

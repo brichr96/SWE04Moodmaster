@@ -10,6 +10,11 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import com.example.moodmaster.feelingScale_MoodShow.FeelingScaleActivity;
 
+/**
+ * This activity serves as the main entry point for the MoodMaster application.
+ * It displays a loading screen with an animation and then navigates to the FeelingScaleActivity.
+ */
+
 public class MainActivity extends AppCompatActivity {
 
     @Override

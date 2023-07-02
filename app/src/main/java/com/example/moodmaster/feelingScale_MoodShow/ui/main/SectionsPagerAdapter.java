@@ -13,8 +13,10 @@ import com.example.moodmaster.fragments.LightFragment;
 import com.example.moodmaster.fragments.StepCounterFragment;
 import com.example.moodmaster.fragments.MoodShowFragment;
 
+
+
 /**
- * A [FragmentPagerAdapter] that returns a fragment corresponding to
+ * A FragmentPagerAdapter that returns a fragment corresponding to
  * one of the sections/tabs/pages.
  */
 public class SectionsPagerAdapter extends FragmentPagerAdapter {
@@ -23,11 +25,23 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
     private static final int[] TAB_TITLES = new int[]{R.string.tab_text_1, R.string.tab_text_2, R.string.tab_text_3};
     private final Context mContext;
 
+    /**
+     * Constructor for SectionsPagerAdapter. Initializes the context and the FragmentManager.
+     *
+     * @param context The context used to access the application resources and services.
+     * @param fm      The FragmentManager for interacting with fragment objects inside of this class.
+     */
     public SectionsPagerAdapter(Context context, FragmentManager fm) {
         super(fm);
         mContext = context;
     }
 
+    /**
+     * Returns the Fragment associated with a specified position.
+     *
+     * @param position The position of the item in the adapter.
+     * @return The Fragment associated with a specified position.
+     */
     @Override
     public Fragment getItem(int position) {
         switch (position) {
@@ -42,15 +56,21 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
         }
     }
 
+    /**
+     * Returns the page title for the top indicator.
+     *
+     * @param position The position of the title requested.
+     * @return A CharSequence containing the page's title.
+     */
     @Nullable
     @Override
     public CharSequence getPageTitle(int position) {
         return mContext.getResources().getString(TAB_TITLES[position]);
     }
 
+
     @Override
     public int getCount() {
-        // Show 3 total pages.
         return 3;
     }
 }

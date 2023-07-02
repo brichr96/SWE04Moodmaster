@@ -27,6 +27,12 @@ import com.github.mikephil.charting.formatter.ValueFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The fragment includes a line chart of the mood history and a color-coded mood score indicator.
+ * The mood score is calculated based on mood history, light levels, and step count, all of which are
+ * stored in a database or SharedPreferences.
+ */
+
 public class MoodShowFragment extends Fragment {
     private LineChart chart;
     private MoodDao moodDao;
